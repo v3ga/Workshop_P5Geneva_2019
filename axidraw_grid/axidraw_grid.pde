@@ -35,8 +35,8 @@ color colorBackground = COLOR_BLACK;
 color colorStroke = COLOR_WHITE;
 
 // Window dimensions
-int windowWidth = 1400;
-int windowHeight = 1000;
+int windowWidth = 1200;
+int windowHeight = 800;
 
 // Resolution max for grid (both x & y)
 int nbGridResMax = 30;
