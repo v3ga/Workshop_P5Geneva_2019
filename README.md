@@ -12,6 +12,11 @@ Cet événement s'adresse à la fois aux débutant·e·s n'ayant jamais touché 
 Les ateliers seront donnés par [Julien Gachadoat](https://www.instagram.com/julienv3ga/) et [Laurent Novac](https://twitter.com/__vac__).
 Des minis conférences seront également données par les intervenants et alumni·e·s Media Design !
 
+## Outil
+![Gifi](https://media.giphy.com/media/VdtYtKGy5YRPPlZMpi/giphy.gif)
+
+## Documentation
+
 
 ## Ressources
 ### Outils
