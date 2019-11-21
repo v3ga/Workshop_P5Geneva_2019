@@ -1,11 +1,17 @@
 ![Axidraw v3](http://v3ga.github.io/Images/Workshop_Bassens_axidraw/axidraw_v3_grid.JPG)
 
-# WORKSHOP “PROCESSING ET TRACEUR AXIDRAW”
-*Du mardi 26 novembre au mercredi 27 novembre 2019 à Stereolux*
+# Processing Geneva 2019
+*Samedi 23 novembre à la HEAD, Genève*
 
-Au croisement du design graphique et de la programmation, ce workshop propose d’utiliser Processing pour créer, générer et imprimer des formes géométriques à l’aide d’un robot à dessin, le traceur Axidraw.
+Un événement du [Master Media Design](https://www.hesge.ch/head/formations-recherche/master-en-media-design) de la HEAD en collaboration avec le [Studio Z1](https://xy-z1.xyz/)
 
-https://www.stereolux.org/agenda/workshop-processing-et-traceur-axidraw
+https://www.facebook.com/events/2395921930670293/
+
+Processing Geneva 2019 est un événement consacré à la découverte, la célébration et l'apprentissage de la programmation dans un but créatif et artistique.
+Cet événement s'adresse à la fois aux débutant·e·s n'ayant jamais touché à une ligne de code mais également aux initié·e·s ayant déjà de l'expérience en programmation.
+Les ateliers seront donnés par [Julien Gachadoat](https://www.instagram.com/julienv3ga/) et [Laurent Novac](https://twitter.com/__vac__).
+Des minis conférences seront également données par les intervenants et alumni·e·s Media Design !
+
 
 ## Ressources
 ### Outils
@@ -16,4 +22,6 @@ https://www.stereolux.org/agenda/workshop-processing-et-traceur-axidraw
 ### Liens
 * [History of computer art part 2 : plotters](https://piratefsh.github.io/2019/01/07/computer-art-history-part-2.html)
 * [Recode Project](www.recodeproject.com)
+
+### Bibliographie
 
