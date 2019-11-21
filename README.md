@@ -26,7 +26,6 @@ Des minis conférences seront également données par les intervenants et alumni
 
 ### Liens
 * [History of computer art part 2 : plotters](https://piratefsh.github.io/2019/01/07/computer-art-history-part-2.html)
-* [Recode Project](www.recodeproject.com)
 
 ### Bibliographie
 
