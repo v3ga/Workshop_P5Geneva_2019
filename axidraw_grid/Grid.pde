@@ -54,7 +54,9 @@ class Grid
     //    this.stripes = new Stripes();
 
     listRenders.add( new GridCellRenderEllipse(this)  );
-    listRenders.add( new GridCellRenderTruchet (this)  );
+    listRenders.add( new GridCellRenderQuad(this)  );
+    listRenders.add( new GridCellRenderTruchet(this)  );
+
     listFields.add( new GridFieldConstant(this)  );
     listFields.add( new GridFieldSine(this)  );
     listFields.add( new GridFieldNoise(this)  );

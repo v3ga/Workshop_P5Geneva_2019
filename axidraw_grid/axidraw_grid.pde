@@ -1,13 +1,19 @@
 /*
 
-  WORKSHOP “PROCESSING ET TRACEUR AXIDRAW”
-  Du mardi 26 novembre au mercredi 27 novembre 2019 à Stereolux
+  Processing Geneva 2019
+  Samedi 23 novembre 2019
+  HEAD, Media Design, Genève
 
-  https://github.com/v3ga/Workshop_Processing_Axidraw_Stereolux_2019/
+  https://github.com/v3ga/Workshop_P5Geneva_2019
  
   —
   
   Julien @v3ga Gachadoat
+  
+  —
+  
+  www.instagram.com/julienv3ga/
+  https://twitter.com/v3ga
   www.v3ga.net
   www.2roqs.com
  
