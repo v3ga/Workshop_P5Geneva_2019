@@ -2,7 +2,7 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
 {
   // ----------------------------------------------------------
   // Parameters
-  int[][] random;
+  // int[][] random;
 
   // ----------------------------------------------------------
   // Controls
@@ -17,73 +17,51 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
   }
 
   // ----------------------------------------------------------
-  void createControls()
+  void beginComputeDirect()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
-
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
-
-    cp5.setBroadcast(true);
+    noiseSeed(int(random(100)));
+    // this.random = new int[this.grid.resx][this.grid.resy];
   }
 
   // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
+  void computeDirect(Rect rect, int i, int j)
   {
-    switch(theEvent.getAction()) 
-    {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      String name = theEvent.getController().getName();
-      float value = theEvent.getController().getValue();
-      //      println(name + "/"+value);
-      break;
-    }
-  }
-
-  // ----------------------------------------------------------
-  void computeDirect()
-  {
-    int i, j, offset;
-    this.random = new int[this.grid.resx][this.grid.resy];
-    
-    for (j=0; j<this.grid.resy; j++)
-    {
-      for (i=0; i<this.grid.resx; i++)
-      {
-        this.random[i][j] = int(random(4));
-      }
-    }
+//    this.random[i][j] = int(random(4));
   }
 
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
+    pushStyle();
+    stroke(colorStroke);
+
+    // Choose random value
+    int r = int(map( grid.getFieldValue(rect.x, rect.y),0.0,1.0,0.0,4.0 ));
+
     float x = rect.x;
     float y = rect.y;
     float w = rect.width;
     float h = rect.height;
-  
-    if (random[i][j] == 0)
+
+    if (r == 0)
     {
-      line(x,y,x+w,y+h);
-    }
-    else if (random[i][j] == 1)
+      line(x, y, x+w, y+h);
+    } else if (r == 1)
     {
-      line(x,y+h,x+w,y);
-    }
-    else if (random[i][j] == 2)
+      line(x, y+h, x+w, y);
+    } else if (r == 2)
     {
-      line(x+w/2,y,x+w/2,y+h);
-    }
-    else if (random[i][j] == 3)
+      line(x+w/2, y, x+w/2, y+h);
+    } else if (r == 3)
     {
-      line(x,y+h/2,x+w,y+h/2);
+      line(x, y+h/2, x+w, y+h/2);
     }
+
+    popStyle();
+  }
+
+  // ----------------------------------------------------------
+  public void controlEvent(CallbackEvent theEvent) 
+  {
   }
 }

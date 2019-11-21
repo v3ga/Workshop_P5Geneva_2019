@@ -35,6 +35,11 @@ class GridField
   }
 
   // ----------------------------------------------------------
+  void prepare()
+  {
+  }
+
+  // ----------------------------------------------------------
   void draw()
   {
   }
@@ -98,6 +103,78 @@ class GridFieldConstant extends GridField implements CallbackListener
     return this.value;
   }
 }
+
+// ----------------------------------------------------------
+class GridFieldRandom extends GridField implements CallbackListener
+{
+  float[][] random;
+
+  // ----------------------------------------------------------
+  GridFieldRandom(Grid grid)
+  {
+    super("Random", grid);
+  }
+
+  // ----------------------------------------------------------
+  void createControls()
+  {
+    int margin = 5;
+    int wControl = int(rectColumnRight.width - 2*margin)-60;
+    int hControl = 20;
+    int padding = 10;
+    int x = 5;
+    int y = 10;
+
+    ControlP5 cp5 = controls.cp5;
+    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
+
+    cp5.setBroadcast(false);
+    cp5.addButton(_id("generate")).setLabel("generate").setPosition(x, y).setGroup(g).addCallback(this);
+    cp5.setBroadcast(true);
+  }
+
+  // ----------------------------------------------------------
+  public void controlEvent(CallbackEvent theEvent) 
+  {
+    switch(theEvent.getAction()) 
+    {
+    case ControlP5.ACTION_RELEASED: 
+    case ControlP5.ACTION_RELEASEDOUTSIDE: 
+      String name = theEvent.getController().getName();
+      float val = theEvent.getController().getValue();
+      //      println(name + "/"+value);
+      if (name.equals( _id("generate") ) )
+      {
+//        this.prepa();
+        this.grid.bComputeGridVec = true;
+      }
+      break;
+    }
+  }
+
+  // ----------------------------------------------------------
+  void prepare()
+  {
+    this.random = new float[this.grid.resx][this.grid.resy];
+    int i, j;
+    for (j=0; j<this.grid.resy; j++)
+      for (i=0; i<this.grid.resx; i++)
+      {
+        this.random[i][j] = random(1.0);
+      }
+  }
+
+  // ----------------------------------------------------------
+  float getValue(float x, float y)
+  {
+    int i = int ((x-this.grid.x) / this.grid.wCell);
+    int j = int ((y-this.grid.y) / this.grid.hCell);
+    if (i < this.grid.resx && j < this.grid.resy)
+      return  this.random[i][j];
+    return 0.0;
+  }
+}
+
 
 // ----------------------------------------------------------
 class GridFieldSine extends GridField implements CallbackListener

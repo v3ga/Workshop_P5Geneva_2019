@@ -14,8 +14,8 @@
   
   www.instagram.com/julienv3ga/
   https://twitter.com/v3ga
-  www.v3ga.net
   www.2roqs.com
+  www.v3ga.net
  
 */
 
@@ -28,7 +28,7 @@ import toxi.math.*;
 
 
 // ------------------------------------------------------
-boolean bModeDirect = false;
+boolean bModeDirect = true;
 
 // ------------------------------------------------------
 // Colors

@@ -51,15 +51,15 @@ class Grid
 
     this.adjustResolutionSquare();
 
-    //    this.stripes = new Stripes();
 
-    listRenders.add( new GridCellRenderEllipse(this)  );
-    listRenders.add( new GridCellRenderQuad(this)  );
+//    listRenders.add( new GridCellRenderEllipse(this)  );
+//    listRenders.add( new GridCellRenderQuad(this)  );
     listRenders.add( new GridCellRenderTruchet(this)  );
 
     listFields.add( new GridFieldConstant(this)  );
     listFields.add( new GridFieldSine(this)  );
     listFields.add( new GridFieldNoise(this)  );
+    listFields.add( new GridFieldRandom(this)  );
   }
 
   // ----------------------------------------------------------
@@ -176,6 +176,12 @@ class Grid
   }
 
   // ----------------------------------------------------------
+  float getFieldValue(float x, float y)
+  {
+    return getFieldValue(new Vec2D(x,y));
+  }
+  
+  // ----------------------------------------------------------
   float getFieldValue(Vec2D p)
   {
     if (this.gridField != null)
@@ -284,6 +290,7 @@ class Grid
     }    
 
     setRandomDrawCell(rndDrawCell);
+    this.gridField.prepare();
 
     computeCells();
   }
@@ -310,7 +317,6 @@ class Grid
   // ----------------------------------------------------------
   void computeCells()
   {
-    println("compute");
     if ( this.gridCellRender != null)
     {
 
@@ -337,7 +343,22 @@ class Grid
       // Mode Direct
       else
       {
-        this.gridCellRender.computeDirect();
+        this.gridCellRender.beginComputeDirect();
+
+        int i, j, offset;
+        for (j=0; j<this.resy; j++)
+        {
+          for (i=0; i<this.resx; i++)
+          {
+            offset = i + this.resx*j;
+            if (bDrawCell[offset])
+            {
+              this.gridCellRender.computeDirect( this.rects[offset], i,j );
+            }
+          }
+        }
+
+      
       }
     }
   }
