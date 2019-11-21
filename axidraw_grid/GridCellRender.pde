@@ -7,8 +7,7 @@ class GridCellRender
   Grid grid;
   ArrayList<Polygon2D> listPolygons;
   Group g;
-  boolean bDrawDirect = true;
-  boolean bDrawPolygon = true;
+  boolean bDrawDirect = false;
   Stripes stripes;
 
   // ----------------------------------------------------------
@@ -27,16 +26,6 @@ class GridCellRender
 
   // ----------------------------------------------------------
   void compute(Rect rect, Polygon2D quad)
-  {
-  }
-
-  // ----------------------------------------------------------
-  void beginComputeDirect()
-  {
-  }
-
-  // ----------------------------------------------------------
-  void computeDirect(Rect rect, int i, int j)
   {
   }
 

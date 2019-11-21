@@ -145,8 +145,7 @@ class GridFieldRandom extends GridField implements CallbackListener
       //      println(name + "/"+value);
       if (name.equals( _id("generate") ) )
       {
-//        this.prepa();
-        this.grid.bComputeGridVec = true;
+        this.grid.bComputeGridVec = true; // will in turn call prepare()
       }
       break;
     }

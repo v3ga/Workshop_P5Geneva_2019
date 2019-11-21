@@ -28,7 +28,9 @@ class Grid
   String perturbation = "random";
   float rndPerturbationMax = 40.0;
   // Cells rendering
-  ArrayList<GridCellRender> listRenders = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRendersPolygon = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRendersDirect = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRenders;
   GridCellRender gridCellRender;
   // Fields
   ArrayList<GridField> listFields = new ArrayList<GridField>();
@@ -52,9 +54,11 @@ class Grid
     this.adjustResolutionSquare();
 
 
-//    listRenders.add( new GridCellRenderEllipse(this)  );
-//    listRenders.add( new GridCellRenderQuad(this)  );
-    listRenders.add( new GridCellRenderTruchet(this)  );
+    listRendersPolygon.add( new GridCellRenderEllipse(this)  );
+    listRendersPolygon.add( new GridCellRenderQuad(this)  );
+    listRendersDirect.add( new GridCellRenderTruchet(this)  );
+
+    listRenders = bModeDirect ? listRendersDirect : listRendersPolygon;
 
     listFields.add( new GridFieldConstant(this)  );
     listFields.add( new GridFieldSine(this)  );
@@ -112,6 +116,7 @@ class Grid
     if (index < this.listFields.size())
     {
       this.gridField = listFields.get(index);
+      this.gridField.prepare();
       showGridFieldControls(this.gridField);
 
       this.bComputeGridVec = true;
@@ -343,22 +348,7 @@ class Grid
       // Mode Direct
       else
       {
-        this.gridCellRender.beginComputeDirect();
-
-        int i, j, offset;
-        for (j=0; j<this.resy; j++)
-        {
-          for (i=0; i<this.resx; i++)
-          {
-            offset = i + this.resx*j;
-            if (bDrawCell[offset])
-            {
-              this.gridCellRender.computeDirect( this.rects[offset], i,j );
-            }
-          }
-        }
-
-      
+        // all is happening in the draw
       }
     }
   }

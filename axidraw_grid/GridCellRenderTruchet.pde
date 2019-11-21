@@ -2,7 +2,6 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
 {
   // ----------------------------------------------------------
   // Parameters
-  // int[][] random;
 
   // ----------------------------------------------------------
   // Controls
@@ -13,20 +12,58 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
     super("Truchet", grid);
     this.grid = grid;
     this.bDrawDirect = true;
-    this.bDrawPolygon = false;
   }
 
   // ----------------------------------------------------------
-  void beginComputeDirect()
+  void drawDirect(Rect rect, int i, int j)
   {
-    noiseSeed(int(random(100)));
-    // this.random = new int[this.grid.resx][this.grid.resy];
+    pushStyle();
+    stroke(colorStroke);
+
+    // Choose random value
+    int r = int(map( grid.getFieldValue(rect.x, rect.y),0.0,1.0,0.0,4.0 ));
+
+    float x = rect.x;
+    float y = rect.y;
+    float w = rect.width;
+    float h = rect.height;
+
+    if (r == 0)
+    {
+      line(x, y, x+w, y+h);
+    } else if (r == 1)
+    {
+      line(x, y+h, x+w, y);
+    } else if (r == 2)
+    {
+      line(x+w/2, y, x+w/2, y+h);
+    } else if (r == 3)
+    {
+      line(x, y+h/2, x+w, y+h/2);
+    }
+
+    popStyle();
   }
 
   // ----------------------------------------------------------
-  void computeDirect(Rect rect, int i, int j)
+  public void controlEvent(CallbackEvent theEvent) 
   {
-//    this.random[i][j] = int(random(4));
+  }
+}
+
+class GridCellRenderTruchet_1 extends GridCellRender implements CallbackListener
+{
+  // ----------------------------------------------------------
+  // Parameters
+
+  // ----------------------------------------------------------
+  // Controls
+
+  // ----------------------------------------------------------
+  GridCellRenderTruchet_1(Grid grid)
+  {
+    super("Truchet", grid);
+    this.grid = grid;
   }
 
   // ----------------------------------------------------------
