@@ -54,6 +54,30 @@ class GridCellRenderTemplate extends GridCellRender
 
 
 ##### En mode indirect
+En mode indirect, c'est la méthode *compute()* qui est appelé pour fabriquer des instances de [Polygon2D](htPolygon2D/toxiclibs.org/docs/core/toxi/geom/Polygon2D.html) à ajouter à la liste *listPolygons* de l'instance.
+Cette méthode prend deux paramètres : 
+* [Rect](http://toxiclibs.org/docs/core/toxi/geom/Rect.html) rect //  coordonnées de la cellule non déformée dans la grille
+* [Polygon2D](http://toxiclibs.org/docs/core/toxi/geom/Polygon2D.html) quad //  coordonnées de la cellule déformée dans la grille
+
+Exemple dans la classe *GridCellRenderQuad*
+
+```java
+// ----------------------------------------------------------
+void compute(Rect rect, Polygon2D quad)
+{
+  // Copy the quad
+  Polygon2D quadCopy = quad.copy(); 
+  // Apply scale
+  quadCopy.scaleSize(this.scalex, this.scaley);
+  // Add to polygons list
+  listPolygons.add( quadCopy );
+  
+  // Stripes ? 
+  if (grid.bComputeStripes)
+    computeStripes(quadCopy, grid.stripesAngleStrategy, grid.getFieldValue( quadCopy.getCentroid() ) );
+}
+```
+
 
 #### GridField
 Cette classe permet de fournir une valeur comprise entre 0 et 1 pour être utilisée pour moduler des variables de rendu de grille (espacement et angle de rotation de hachures, mise à l’échelle de motif, etc...)
@@ -63,18 +87,16 @@ Voir par exemple la classe *GridCellRenderEllipse* qui utilise cette valeur pour
 Cette classe permet de gérer les caractéristiques principales de la grille (résolutions, dimensions, déformations)
 Elle maintient une liste d'instances de *GridCellRender* et de *GridField*.
 
-Stripes
+#### Stripes
 
 
 
-## Ressources
 ### Outils
-* [Processing](www.processing.org)
+* [Processing](www.processing.org) avec les librairies suivantes : 
 * [Axidraw](www.axidraw.com)
 * [Inkscape pour Axidraw](https://wiki.evilmadscientist.com/Axidraw_Software_Installation)
 
 ### Liens
 * [History of computer art part 2 : plotters](https://piratefsh.github.io/2019/01/07/computer-art-history-part-2.html)
 
-### Bibliographie
 
