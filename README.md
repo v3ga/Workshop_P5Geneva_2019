@@ -92,7 +92,9 @@ Elle maintient une liste d'instances de *GridCellRender* et de *GridField*.
 
 
 ### Outils
-* [Processing](www.processing.org) avec les librairies suivantes : 
+* [Processing](www.processing.org) avec les librairies suivantes :
+  * [controlP5](http://www.sojamo.de/libraries/controlP5/) par [Andreas Schlegel](http://www.sojamo.de/) 
+  * [toxiclibs](http://toxiclibs.org/) par [Karsten Schmidt](http://postspectacular.com/)
 * [Axidraw](www.axidraw.com)
 * [Inkscape pour Axidraw](https://wiki.evilmadscientist.com/Axidraw_Software_Installation)
 
