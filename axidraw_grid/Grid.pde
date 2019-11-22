@@ -58,6 +58,7 @@ class Grid
     listRendersPolygon.add( new GridCellRenderQuad(this)  );
     listRendersDirect.add( new GridCellRenderTemplate(this)  );
     listRendersDirect.add( new GridCellRenderTruchet(this)  );
+    listRendersDirect.add( new GridCellRenderVera(this)  );
 
     listRenders = bModeDirect ? listRendersDirect : listRendersPolygon;
 
