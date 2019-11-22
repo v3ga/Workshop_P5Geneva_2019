@@ -12,10 +12,9 @@ class GridCellRenderQuad extends GridCellRender implements CallbackListener
   Slider sliderScalex, sliderScaley;
 
   // ----------------------------------------------------------
-  GridCellRenderQuad(Grid grid)
+  GridCellRenderQuad()
   {
-    super("Quads", grid);
-    this.grid = grid;
+    super("Quads");
   }
 
   // ----------------------------------------------------------

@@ -11,10 +11,9 @@ class GridCellRender
   Stripes stripes;
 
   // ----------------------------------------------------------
-  GridCellRender(String name, Grid grid)
+  GridCellRender(String name)
   {
     this.name = name;
-    this.grid = grid;
     this.stripes = new Stripes();
   }
 
@@ -121,7 +120,7 @@ class GridCellRender
       popStyle();
     }
   }
-
+  
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {

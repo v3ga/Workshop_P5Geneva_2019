@@ -53,21 +53,30 @@ class Grid
 
     this.adjustResolutionSquare();
 
-
-    listRendersPolygon.add( new GridCellRenderEllipse(this)  );
-    listRendersPolygon.add( new GridCellRenderQuad(this)  );
-    listRendersDirect.add( new GridCellRenderTemplate(this)  );
-    listRendersDirect.add( new GridCellRenderTruchet(this)  );
-    listRendersDirect.add( new GridCellRenderVera(this)  );
-
     listRenders = bModeDirect ? listRendersDirect : listRendersPolygon;
-
-    listFields.add( new GridFieldConstant(this)  );
-    listFields.add( new GridFieldSine(this)  );
-    listFields.add( new GridFieldNoise(this)  );
-    listFields.add( new GridFieldRandom(this)  );
   }
 
+  // ----------------------------------------------------------
+  void addGridCellRenderDirect(GridCellRender gcr)
+  {
+    listRendersDirect.add(gcr);
+    gcr.grid = this;
+  }
+
+  // ----------------------------------------------------------
+  void addGridCellRenderPolygon(GridCellRender gcr)
+  {
+    listRendersPolygon.add(gcr);
+    gcr.grid = this;
+  }
+
+  // ----------------------------------------------------------
+  void addGridField(GridField gf)
+  {
+    listFields.add(gf);
+    gf.grid = this;
+  }
+  
   // ----------------------------------------------------------
   void createControls()
   {

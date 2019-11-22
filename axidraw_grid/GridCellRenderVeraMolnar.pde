@@ -1,8 +1,8 @@
 class GridCellRenderVera extends GridCellRender{
   
-  GridCellRenderVera(Grid grid)
+  GridCellRenderVera()
   {
-    super("Vera", grid);
+    super("Vera");
   }
 
   // ----------------------------------------------------------

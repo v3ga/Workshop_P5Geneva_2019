@@ -5,10 +5,9 @@ class GridField
   Group g;
 
   // ----------------------------------------------------------
-  GridField(String name, Grid grid)
+  GridField(String name)
   {
     this.name = name;
-    this.grid = grid;
   }
 
   // ----------------------------------------------------------
@@ -52,9 +51,9 @@ class GridFieldConstant extends GridField implements CallbackListener
   Slider sliderValue;
 
   // ----------------------------------------------------------
-  GridFieldConstant(Grid grid)
+  GridFieldConstant()
   {
-    super("Constant", grid);
+    super("Constant");
   }
 
   // ----------------------------------------------------------
@@ -110,9 +109,9 @@ class GridFieldRandom extends GridField implements CallbackListener
   float[][] random;
 
   // ----------------------------------------------------------
-  GridFieldRandom(Grid grid)
+  GridFieldRandom()
   {
-    super("Random", grid);
+    super("Random");
   }
 
   // ----------------------------------------------------------
@@ -185,9 +184,9 @@ class GridFieldSine extends GridField implements CallbackListener
   Slider2D slider2Dcenter;
 
   // ----------------------------------------------------------
-  GridFieldSine(Grid grid)
+  GridFieldSine()
   {
-    super("Sine", grid);
+    super("Sine");
   }
 
   // ----------------------------------------------------------
@@ -256,9 +255,9 @@ class GridFieldNoise extends GridField implements CallbackListener
   Slider sliderNbPeriod;
 
   // ----------------------------------------------------------
-  GridFieldNoise(Grid grid)
+  GridFieldNoise()
   {
-    super("Perlin Noise", grid);
+    super("Perlin Noise");
   }
 
   // ----------------------------------------------------------

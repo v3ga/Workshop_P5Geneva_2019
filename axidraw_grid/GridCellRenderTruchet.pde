@@ -7,9 +7,9 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
   // Controls
 
   // ----------------------------------------------------------
-  GridCellRenderTruchet(Grid grid)
+  GridCellRenderTruchet()
   {
-    super("Truchet", grid);
+    super("Truchet");
     this.grid = grid;
     this.bDrawDirect = true;
   }
@@ -60,10 +60,9 @@ class GridCellRenderTruchet_1 extends GridCellRender implements CallbackListener
   // Controls
 
   // ----------------------------------------------------------
-  GridCellRenderTruchet_1(Grid grid)
+  GridCellRenderTruchet_1()
   {
-    super("Truchet", grid);
-    this.grid = grid;
+    super("Truchet_1");
   }
 
   // ----------------------------------------------------------
