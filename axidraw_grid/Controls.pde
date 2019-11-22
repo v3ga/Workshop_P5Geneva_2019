@@ -109,8 +109,8 @@ class Controls
       sliderRndCell =  cp5.addSlider("rndCell").setPosition(x, y).setSize(wControl, hControl).setRange(0.0, 1.0).setValue(grid.rndDrawCell).setGroup(gGrid).addCallback(cbGrid);
       y+=(hControl+padding);
 
-      cp5.addLabel("Stripes").setPosition(x, y).setColor(color(255));
-      y+=(hControl+padding);
+//      cp5.addLabel("Stripes").setPosition(x, y).setColor(color(255));
+//      y+=(hControl+padding);
 
       dlStripesAngleStrategy = cp5.addDropdownList("dlStripesAngleStrategy").setPosition(x, y).setWidth(wControl/2).setGroup(gGrid).setLabel("stripes angle strategy").addCallback(cbGrid);
       customizeDropdown(dlStripesAngleStrategy, hControl);
