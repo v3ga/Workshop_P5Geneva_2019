@@ -1,14 +1,11 @@
-
-
 // ----------------------------------------------------------
 class GridCellRender
 {
   String name;
   Grid grid;
   ArrayList<Polygon2D> listPolygons;
-  Group g;
-  boolean bDrawDirect = false;
   Stripes stripes;
+  Group g;
 
   // ----------------------------------------------------------
   GridCellRender(String name)
@@ -120,9 +117,36 @@ class GridCellRender
       popStyle();
     }
   }
+
+  // ----------------------------------------------------------
+  void beginDrawDirect()
+  {
+    pushStyle();
+    stroke(colorStroke);
+    noFill();
+  }
   
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
   }
+
+  // ----------------------------------------------------------
+  void endDrawDirect()
+  {
+    popStyle();
+  }
+
+  // ----------------------------------------------------------
+  float getGridFieldValue(float x, float y)
+  {
+    return this.grid.getFieldValue(x,y);
+  }
+
+  // ----------------------------------------------------------
+  float getGridFieldValue(Vec2D p)
+  {
+    return this.getGridFieldValue(p.x,p.y);
+  }
+
 }

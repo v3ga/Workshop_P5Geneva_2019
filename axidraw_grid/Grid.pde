@@ -76,7 +76,7 @@ class Grid
     listFields.add(gf);
     gf.grid = this;
   }
-  
+
   // ----------------------------------------------------------
   void createControls()
   {
@@ -194,9 +194,9 @@ class Grid
   // ----------------------------------------------------------
   float getFieldValue(float x, float y)
   {
-    return getFieldValue(new Vec2D(x,y));
+    return getFieldValue(new Vec2D(x, y));
   }
-  
+
   // ----------------------------------------------------------
   float getFieldValue(Vec2D p)
   {
@@ -472,6 +472,8 @@ class Grid
         gridCellRender.drawStripes();
       } else
       {
+        gridCellRender.beginDrawDirect();
+
         int i, j, offset;
         for (j=0; j<this.resy; j++)
         {
@@ -481,6 +483,8 @@ class Grid
             gridCellRender.drawDirect(rects[offset], i, j);
           }
         }
+
+        gridCellRender.endDrawDirect();
       }
     }
 

@@ -10,8 +10,6 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
   GridCellRenderTruchet()
   {
     super("Truchet");
-    this.grid = grid;
-    this.bDrawDirect = true;
   }
 
   // ----------------------------------------------------------
@@ -21,7 +19,7 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
     stroke(colorStroke);
 
     // Choose random value
-    int r = int(map( grid.getFieldValue(rect.x, rect.y),0.0,1.0,0.0,4.0 ));
+    int r = int(map( getGridFieldValue(rect.x, rect.y), 0.0, 1.0, 0.0, 4.0 ));
 
     float x = rect.x;
     float y = rect.y;
@@ -68,11 +66,8 @@ class GridCellRenderTruchet_1 extends GridCellRender implements CallbackListener
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
-    pushStyle();
-    stroke(colorStroke);
-
     // Choose random value
-    int r = int(map( grid.getFieldValue(rect.x, rect.y),0.0,1.0,0.0,4.0 ));
+    int r = int(map( grid.getFieldValue(rect.x, rect.y), 0.0, 1.0, 0.0, 4.0 ));
 
     float x = rect.x;
     float y = rect.y;
@@ -92,8 +87,6 @@ class GridCellRenderTruchet_1 extends GridCellRender implements CallbackListener
     {
       line(x, y+h/2, x+w, y+h/2);
     }
-
-    popStyle();
   }
 
   // ----------------------------------------------------------
