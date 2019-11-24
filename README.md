@@ -45,9 +45,13 @@ class GridCellRenderTemplate extends GridCellRender
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
-    stroke(colorStroke);
-    line(rect.x, rect.y, rect.x+ rect.width, rect.y+ rect.height);
-    line(rect.x, rect.y+ rect.height, rect.x+ rect.width, rect.y);
+    pushMatrix();
+    translate(rect.x, rect.y);
+
+    line(0, 0, rect.width, rect.height);
+    line(0, rect.height, rect.width, 0);
+    
+    popMatrix();
   }
 }
 ```
