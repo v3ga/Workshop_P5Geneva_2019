@@ -480,7 +480,10 @@ class Grid
           for (i=0; i<this.resx; i++)
           {
             offset = i + this.resx*j;
+            pushMatrix();
+            translate(rects[offset].x, rects[offset].y);
             gridCellRender.drawDirect(rects[offset], i, j);
+            popMatrix();
           }
         }
 
