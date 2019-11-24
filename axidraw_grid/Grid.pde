@@ -33,8 +33,6 @@ class Grid
   // Fields
   ArrayList<GridField> listFields = new ArrayList<GridField>();
   GridField gridField;
-  // Stripes
-  // Stripes stripes;
   // Stripes / angle strategy
   // 0 = constant vertical
   // 1 = cosntant horizontal
@@ -50,8 +48,6 @@ class Grid
     this.rectViewport = rectViewport;
 
     this.adjustResolutionSquare();
-
-    //    this.stripes = new Stripes();
 
     listRenders.add( new GridCellRenderEllipse(this)  );
     listRenders.add( new GridCellRenderQuad(this)  );

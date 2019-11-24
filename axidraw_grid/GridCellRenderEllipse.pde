@@ -2,10 +2,10 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
 {
   // ----------------------------------------------------------
   // Parameters
-  // Number of points for the ellipse
-  int ellipseRes = 20;
+  // Number of points for the ellipse polygon (3 is a triangle, 4 a quad :)
+  int res = 20;
   // Scale along x,y axis
-  float ellipseScalex = 1.0, ellipseScaley = 1.0;
+  float scalex = 1.0, scaley = 1.0;
 
   // ----------------------------------------------------------
   // Controls
@@ -25,7 +25,7 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
     Vec2D c = new Vec2D(rect.x+0.5*rect.width, rect.y+0.5*rect.height);
 
     // Ellipse
-    Polygon2D ellipse = new Ellipse(c, new Vec2D(this.ellipseScalex*grid.wCell/2, this.ellipseScaley*grid.hCell/2)).toPolygon2D(this.ellipseRes); 
+    Polygon2D ellipse = new Ellipse(c, new Vec2D(this.scalex*grid.wCell/2, this.scaley*grid.hCell/2)).toPolygon2D(this.res); 
 
     // Fit ellipse into quad
     Polygon2D ellipsePertubation = constrainIntoQuad(ellipse, rect, quad);
@@ -44,7 +44,7 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
     pushStyle();
     noFill();
     stroke(colorStroke);
-    ellipse(rect.x+0.5*rect.width, rect.y+0.5*rect.height, this.ellipseScalex*rect.width, this.ellipseScaley*rect.height);  
+    ellipse(rect.x+0.5*rect.width, rect.y+0.5*rect.height, this.scalex*rect.width, this.scaley*rect.height);  
     popStyle();
   }
 
@@ -63,11 +63,11 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
     g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
 
     cp5.setBroadcast(false);
-    sliderEllipseRes = cp5.addSlider( _id("res") ).setLabel("res").setPosition(x, y).setSize(wControl, hControl).setRange(3, 30).setNumberOfTickMarks(30-2).setValue(this.ellipseRes).setGroup(g).addCallback(this);
+    sliderEllipseRes = cp5.addSlider( _id("res") ).setLabel("res").setPosition(x, y).setSize(wControl, hControl).setRange(3, 30).setNumberOfTickMarks(30-2).setValue(this.res).setGroup(g).addCallback(this);
     y+=(hControl+padding);
-    sliderEllipseScalex = cp5.addSlider( _id("scalex") ).setLabel("scalex").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.ellipseScalex).setGroup(g).addCallback(this);
+    sliderEllipseScalex = cp5.addSlider( _id("scalex") ).setLabel("scalex").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scalex).setGroup(g).addCallback(this);
     y+=(hControl+padding);
-    sliderEllipseScaley = cp5.addSlider( _id("scaley") ).setLabel("scaley").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.ellipseScaley).setGroup(g).addCallback(this);
+    sliderEllipseScaley = cp5.addSlider( _id("scaley") ).setLabel("scaley").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scaley).setGroup(g).addCallback(this);
 
     cp5.setBroadcast(true);
   }
@@ -84,15 +84,15 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
       //      println(name + "/"+value);
       if (name.equals( _id("res") ) )
       {
-        this.ellipseRes = int(value);
+        this.res = int(value);
         this.grid.bComputeGridVec = true;
       } else if (name.equals( _id("scalex") ) )
       {
-        this.ellipseScalex = value;
+        this.scalex = value;
         this.grid.bComputeGridVec = true;
       } else if (name.equals( _id("scaley") ) )
       {
-        this.ellipseScaley = value;
+        this.scaley = value;
         this.grid.bComputeGridVec = true;
       }        
       break;

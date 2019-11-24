@@ -1,7 +1,7 @@
 /*
 
   Processing Geneva 2019
-  Samedi 23 novembre 2019
+  Samedi 23 november 2019
   HEAD, Media Design, Genève
 
   https://github.com/v3ga/Workshop_P5Geneva_2019
@@ -14,8 +14,8 @@
   
   www.instagram.com/julienv3ga/
   https://twitter.com/v3ga
-  www.v3ga.net
   www.2roqs.com
+  www.v3ga.net
  
 */
 
@@ -28,7 +28,7 @@ import toxi.math.*;
 
 
 // ------------------------------------------------------
-boolean bModeDirect = false;
+boolean bModeDirect = true;
 
 // ------------------------------------------------------
 // Colors

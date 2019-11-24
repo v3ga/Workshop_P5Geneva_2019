@@ -12,8 +12,8 @@ class GridCellRenderTruchet extends GridCellRender implements CallbackListener
   {
     super("Truchet", grid);
     this.grid = grid;
-    this.bDrawDirect = true;
-    this.bDrawPolygon = false;
+//    this.bDrawDirect = true;
+//    this.bDrawPolygon = false;
   }
 
   // ----------------------------------------------------------
