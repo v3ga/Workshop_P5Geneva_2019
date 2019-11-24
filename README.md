@@ -91,10 +91,6 @@ Voir par exemple la classe *GridCellRenderEllipse* qui utilise cette valeur pour
 Cette classe permet de gérer les caractéristiques principales de la grille (résolutions, dimensions, déformations)
 Elle maintient une liste d'instances de *GridCellRender* et de *GridField*.
 
-#### Stripes
-
-
-
 ### Outils
 * [Processing](www.processing.org) avec les librairies suivantes :
   * [controlP5](http://www.sojamo.de/libraries/controlP5/) par [Andreas Schlegel](http://www.sojamo.de/) 
