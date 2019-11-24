@@ -1,23 +1,5 @@
 /*
 
-<<<<<<< HEAD
-  Processing Geneva 2019
-  Samedi 23 november 2019
-  HEAD, Media Design, Genève
-
-  https://github.com/v3ga/Workshop_P5Geneva_2019
- 
-  —
-  
-  Julien @v3ga Gachadoat
-  
-  —
-  
-  www.instagram.com/julienv3ga/
-  https://twitter.com/v3ga
-  www.2roqs.com
-  www.v3ga.net
-=======
  Processing Geneva 2019
  Samedi 23 novembre 2019
  HEAD, Media Design, Genève
@@ -35,7 +17,6 @@
  https://twitter.com/v3ga
  www.2roqs.com
  www.v3ga.net
->>>>>>> origin/master
  
  */
 
@@ -47,7 +28,7 @@ import toxi.geom.*;
 import toxi.math.*;
 
 // ------------------------------------------------------
-boolean bModeDirect = true;
+boolean bModeDirect = false;
 
 // ------------------------------------------------------
 // Colors

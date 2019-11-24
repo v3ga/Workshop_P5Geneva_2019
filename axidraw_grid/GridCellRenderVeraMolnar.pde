@@ -12,7 +12,7 @@ class GridCellRenderVera extends GridCellRender{
     float y = rect.y;
     float w = rect.width;
     float h = rect.height;
-    float v = this.getGridFieldValue(x, y);
+    float v = this.grid.getFieldValue(x, y);
     randomSeed(floor(v));
     int rndIndex = floor(random(0, 4));
     int rndIndex2 = floor(random(0, 4));

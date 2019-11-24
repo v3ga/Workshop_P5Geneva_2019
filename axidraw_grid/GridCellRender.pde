@@ -32,11 +32,6 @@ class GridCellRender
   }
 
   // ----------------------------------------------------------
-  void createControls()
-  {
-  }
-
-  // ----------------------------------------------------------
   void showControls()
   {
     g.show();
@@ -45,9 +40,12 @@ class GridCellRender
   // ----------------------------------------------------------
   void hideControls()
   {
-<<<<<<< HEAD
     g.hide();
-=======
+  }
+
+  // ----------------------------------------------------------
+  void createControls()
+  {
     int margin = 5;
     int wControl = int(rectColumnRight.width - 2*margin)-60;
     int hControl = 20;
@@ -59,7 +57,6 @@ class GridCellRender
     g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
 
     cp5.setBroadcast(true);
->>>>>>> origin/master
   }
 
   // ----------------------------------------------------------

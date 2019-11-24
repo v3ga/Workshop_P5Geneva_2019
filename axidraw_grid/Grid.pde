@@ -35,6 +35,8 @@ class Grid
   // Fields
   ArrayList<GridField> listFields = new ArrayList<GridField>();
   GridField gridField;
+  // Stripes
+  // Stripes stripes;
   // Stripes / angle strategy
   // 0 = constant vertical
   // 1 = cosntant horizontal
@@ -51,11 +53,6 @@ class Grid
 
     this.adjustResolutionSquare();
 
-<<<<<<< HEAD
-    listRenders.add( new GridCellRenderEllipse(this)  );
-    listRenders.add( new GridCellRenderQuad(this)  );
-    listRenders.add( new GridCellRenderTruchet(this)  );
-=======
     listRenders = bModeDirect ? listRendersDirect : listRendersPolygon;
   }
 
@@ -72,7 +69,6 @@ class Grid
     listRendersPolygon.add(gcr);
     gcr.grid = this;
   }
->>>>>>> origin/master
 
   // ----------------------------------------------------------
   void addGridField(GridField gf)
