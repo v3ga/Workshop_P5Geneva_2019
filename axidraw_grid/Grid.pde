@@ -28,7 +28,9 @@ class Grid
   String perturbation = "random";
   float rndPerturbationMax = 40.0;
   // Cells rendering
-  ArrayList<GridCellRender> listRenders = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRendersPolygon = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRendersDirect = new ArrayList<GridCellRender>();
+  ArrayList<GridCellRender> listRenders;
   GridCellRender gridCellRender;
   // Fields
   ArrayList<GridField> listFields = new ArrayList<GridField>();
@@ -49,13 +51,34 @@ class Grid
 
     this.adjustResolutionSquare();
 
+<<<<<<< HEAD
     listRenders.add( new GridCellRenderEllipse(this)  );
     listRenders.add( new GridCellRenderQuad(this)  );
     listRenders.add( new GridCellRenderTruchet(this)  );
+=======
+    listRenders = bModeDirect ? listRendersDirect : listRendersPolygon;
+  }
 
-    listFields.add( new GridFieldConstant(this)  );
-    listFields.add( new GridFieldSine(this)  );
-    listFields.add( new GridFieldNoise(this)  );
+  // ----------------------------------------------------------
+  void addGridCellRenderDirect(GridCellRender gcr)
+  {
+    listRendersDirect.add(gcr);
+    gcr.grid = this;
+  }
+
+  // ----------------------------------------------------------
+  void addGridCellRenderPolygon(GridCellRender gcr)
+  {
+    listRendersPolygon.add(gcr);
+    gcr.grid = this;
+  }
+>>>>>>> origin/master
+
+  // ----------------------------------------------------------
+  void addGridField(GridField gf)
+  {
+    listFields.add(gf);
+    gf.grid = this;
   }
 
   // ----------------------------------------------------------
@@ -108,6 +131,7 @@ class Grid
     if (index < this.listFields.size())
     {
       this.gridField = listFields.get(index);
+      this.gridField.prepare();
       showGridFieldControls(this.gridField);
 
       this.bComputeGridVec = true;
@@ -169,6 +193,12 @@ class Grid
   {
     this.rndDrawCell = rnd_;
     this.setRandomDrawCell(rnd_);
+  }
+
+  // ----------------------------------------------------------
+  float getFieldValue(float x, float y)
+  {
+    return getFieldValue(new Vec2D(x, y));
   }
 
   // ----------------------------------------------------------
@@ -280,6 +310,7 @@ class Grid
     }    
 
     setRandomDrawCell(rndDrawCell);
+    this.gridField.prepare();
 
     computeCells();
   }
@@ -306,7 +337,6 @@ class Grid
   // ----------------------------------------------------------
   void computeCells()
   {
-    println("compute");
     if ( this.gridCellRender != null)
     {
 
@@ -333,7 +363,7 @@ class Grid
       // Mode Direct
       else
       {
-        this.gridCellRender.computeDirect();
+        // all is happening in the draw
       }
     }
   }
@@ -446,6 +476,8 @@ class Grid
         gridCellRender.drawStripes();
       } else
       {
+        gridCellRender.beginDrawDirect();
+
         int i, j, offset;
         for (j=0; j<this.resy; j++)
         {
@@ -455,6 +487,8 @@ class Grid
             gridCellRender.drawDirect(rects[offset], i, j);
           }
         }
+
+        gridCellRender.endDrawDirect();
       }
     }
 

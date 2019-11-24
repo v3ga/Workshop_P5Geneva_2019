@@ -12,10 +12,9 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
   Slider sliderEllipseRes, sliderEllipseScalex, sliderEllipseScaley;
 
   // ----------------------------------------------------------
-  GridCellRenderEllipse(Grid grid)
+  GridCellRenderEllipse()
   {
-    super("Ellipses", grid);
-    this.grid = grid;
+    super("Ellipses");
   }
 
   // ----------------------------------------------------------

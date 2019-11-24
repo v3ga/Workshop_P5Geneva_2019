@@ -4,16 +4,13 @@ class GridCellRender
   String name;
   Grid grid;
   ArrayList<Polygon2D> listPolygons;
-  Group g;
-  boolean bDrawDirect = true;
-  boolean bDrawPolygon = true;
   Stripes stripes;
+  Group g;
 
   // ----------------------------------------------------------
-  GridCellRender(String name, Grid grid)
+  GridCellRender(String name)
   {
     this.name = name;
-    this.grid = grid;
     this.stripes = new Stripes();
   }
 
@@ -25,11 +22,6 @@ class GridCellRender
 
   // ----------------------------------------------------------
   void compute(Rect rect, Polygon2D quad)
-  {
-  }
-
-  // ----------------------------------------------------------
-  void computeDirect()
   {
   }
 
@@ -53,7 +45,21 @@ class GridCellRender
   // ----------------------------------------------------------
   void hideControls()
   {
+<<<<<<< HEAD
     g.hide();
+=======
+    int margin = 5;
+    int wControl = int(rectColumnRight.width - 2*margin)-60;
+    int hControl = 20;
+    int padding = 10;
+    int x = 5;
+    int y = 10;
+
+    ControlP5 cp5 = controls.cp5;
+    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
+
+    cp5.setBroadcast(true);
+>>>>>>> origin/master
   }
 
   // ----------------------------------------------------------
@@ -116,7 +122,34 @@ class GridCellRender
   }
 
   // ----------------------------------------------------------
+  void beginDrawDirect()
+  {
+    pushStyle();
+    stroke(colorStroke);
+    noFill();
+  }
+  
+  // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
   }
+
+  // ----------------------------------------------------------
+  void endDrawDirect()
+  {
+    popStyle();
+  }
+
+  // ----------------------------------------------------------
+  float getGridFieldValue(float x, float y)
+  {
+    return this.grid.getFieldValue(x,y);
+  }
+
+  // ----------------------------------------------------------
+  float getGridFieldValue(Vec2D p)
+  {
+    return this.getGridFieldValue(p.x,p.y);
+  }
+
 }

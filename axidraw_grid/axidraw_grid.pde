@@ -1,5 +1,6 @@
 /*
 
+<<<<<<< HEAD
   Processing Geneva 2019
   Samedi 23 november 2019
   HEAD, Media Design, Genève
@@ -16,8 +17,27 @@
   https://twitter.com/v3ga
   www.2roqs.com
   www.v3ga.net
+=======
+ Processing Geneva 2019
+ Samedi 23 novembre 2019
+ HEAD, Media Design, Genève
  
-*/
+ https://github.com/v3ga/Workshop_P5Geneva_2019
+ 
+ —
+ 
+ Julien @v3ga Gachadoat
+ with contributions by Laurent @__vac__ Novac
+ 
+ —
+ 
+ www.instagram.com/julienv3ga/
+ https://twitter.com/v3ga
+ www.2roqs.com
+ www.v3ga.net
+>>>>>>> origin/master
+ 
+ */
 
 // ------------------------------------------------------
 import java.util.*;
@@ -25,7 +45,6 @@ import processing.svg.*;
 import controlP5.*;
 import toxi.geom.*;
 import toxi.math.*;
-
 
 // ------------------------------------------------------
 boolean bModeDirect = true;
@@ -69,35 +88,32 @@ boolean bExportSVG = false;
 // ------------------------------------------------------
 void settings()
 {
-  size(windowWidth,windowHeight);
+  size(windowWidth, windowHeight);
   setupLayout();
   setupColors();
 }
 
 // ------------------------------------------------------
-void setupLayout()
-{
-
-  float r = 0.25;
-  float wRectColumn = r*windowWidth;
-  rectColumnLeft = new Rect(0,0,wRectColumn,windowHeight);
-  rectColumnRight = new Rect(width-wRectColumn,0,wRectColumn,windowHeight);
-  float wRectGrid = width - (rectColumnLeft.width+rectColumnRight.width);
-  rectGrid = new Rect(wRectColumn,0,wRectGrid,windowHeight);
-}
-
-
-// ------------------------------------------------------
-void setupColors()
-{
-    colorBackground = bDarkMode ? COLOR_BLACK : COLOR_WHITE;
-    colorStroke = bDarkMode ? COLOR_WHITE : COLOR_BLACK;
-}
-
-// ------------------------------------------------------
 void setupGrid()
 {
-  grid = new Grid(10,10,rectGrid);
+  // Create the grid
+  grid = new Grid(10, 10, rectGrid);
+
+  // Add renderers + fields
+  // Undirect / polygon mode
+  grid.addGridCellRenderPolygon( new GridCellRenderEllipse()  );
+  grid.addGridCellRenderPolygon( new GridCellRenderQuad()  );
+
+  // Direct mode 
+  grid.addGridCellRenderDirect( new GridCellRenderTemplate() );
+  grid.addGridCellRenderDirect( new GridCellRenderTruchet() );
+  grid.addGridCellRenderDirect( new GridCellRenderVera() );
+
+  // Fields
+  grid.addGridField( new GridFieldConstant() );
+  grid.addGridField( new GridFieldSine() );
+  grid.addGridField( new GridFieldNoise() );
+  grid.addGridField( new GridFieldRandom() );
 }
 
 // ------------------------------------------------------
@@ -107,11 +123,38 @@ void setup()
   setupMedias();
   setupGrid();
   setupControls();
-  
+
   grid.selectGridCellRenderWithIndex(0);
   grid.selectGridFieldWithIndex(0);
 }
 
+// ------------------------------------------------------
+void setupColors()
+{
+  colorBackground = bDarkMode ? COLOR_BLACK : COLOR_WHITE;
+  colorStroke = bDarkMode ? COLOR_WHITE : COLOR_BLACK;
+}
+
+// ------------------------------------------------------
+void setupLayout()
+{
+  float r = 0.25;
+  float wRectColumn = r*windowWidth;
+  rectColumnLeft = new Rect(0, 0, wRectColumn, windowHeight);
+  rectColumnRight = new Rect(width-wRectColumn, 0, wRectColumn, windowHeight);
+  float wRectGrid = width - (rectColumnLeft.width+rectColumnRight.width);
+  rectGrid = new Rect(wRectColumn, 0, wRectGrid, windowHeight);
+}
+
+// ------------------------------------------------------
+void setupMedias()
+{
+}
+
+// ------------------------------------------------------
+void setupLibraries()
+{
+}
 
 // ------------------------------------------------------
 void draw()
@@ -128,10 +171,36 @@ void draw()
 }
 
 // ------------------------------------------------------
+void drawLayout()
+{
+  pushStyle();
+  noStroke();
+  fill(0);
+  rect(rectColumnLeft.x, rectColumnLeft.y, rectColumnLeft.width, rectColumnLeft.height);
+  rect(rectColumnRight.x, rectColumnRight.y, rectColumnRight.width, rectColumnRight.height);
+  popStyle();
+}
+
+// ------------------------------------------------------
+void drawDebug()
+{
+  if (bDrawDebug)
+  {
+    pushStyle();
+    noFill();
+    stroke(200, 0, 0, 50);
+    rect(rectColumnLeft.x, rectColumnLeft.y, rectColumnLeft.width, rectColumnLeft.height);
+    rect(rectColumnRight.x, rectColumnRight.y, rectColumnRight.width, rectColumnRight.height);
+    rect(rectGrid.x, rectGrid.y, rectGrid.width, rectGrid.height);
+    popStyle();
+  }
+}
+
+// ------------------------------------------------------
 void beginExportSVG()
 {
   if (bExportSVG)
-      beginRecord(SVG, strExportFolder + Utils.timestamp() + "_grid.svg");
+    beginRecord(SVG, strExportFolder + Utils.timestamp() + "_grid.svg");
 }
 
 // ------------------------------------------------------
@@ -146,33 +215,6 @@ void endExportSVG()
 
 
 // ------------------------------------------------------
-void drawLayout()
-{
-  pushStyle();
-  noStroke();
-  fill(0);
-  rect(rectColumnLeft.x,rectColumnLeft.y,rectColumnLeft.width,rectColumnLeft.height);
-  rect(rectColumnRight.x,rectColumnRight.y,rectColumnRight.width,rectColumnRight.height);
-  popStyle();
-}
-
-// ------------------------------------------------------
-void drawDebug()
-{
-  if (bDrawDebug)
-  {
-    pushStyle();
-    noFill();
-    stroke(200,0,0,50);
-    rect(rectColumnLeft.x,rectColumnLeft.y,rectColumnLeft.width,rectColumnLeft.height);
-    rect(rectColumnRight.x,rectColumnRight.y,rectColumnRight.width,rectColumnRight.height);
-    rect(rectGrid.x,rectGrid.y,rectGrid.width,rectGrid.height);
-    popStyle();
-  }
-}
-
-
-// ------------------------------------------------------
 void keyPressed()
 {
   if (key == 'c')
@@ -182,5 +224,4 @@ void keyPressed()
   {
     controls.open();
   }
-
 }
