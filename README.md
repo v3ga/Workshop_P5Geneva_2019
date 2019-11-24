@@ -37,9 +37,9 @@ C'est la méthode *drawDirect()* de la classe qui est appelé avec en paramètre
 ```java
 class GridCellRenderTemplate extends GridCellRender 
 {
-  GridCellRenderTemplate(Grid grid)
+  GridCellRenderTemplate()
   {
-    super("Template", grid);
+    super("Template");
   }
 
   // ----------------------------------------------------------
