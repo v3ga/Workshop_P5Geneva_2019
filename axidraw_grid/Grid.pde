@@ -142,7 +142,7 @@ class Grid
     if (index < this.listFields.size())
     {
       this.gridField = listFields.get(index);
-      this.gridField.prepare();
+//      this.gridField.prepare();
 
       this.bComputeGridVec = true;
       this.bUpdateControls = true;
@@ -199,6 +199,7 @@ class Grid
   {
     this.resy = resy;
     this.adjustResolutionSquare();
+    
   }
 
   // ----------------------------------------------------------
@@ -218,7 +219,8 @@ class Grid
   void setRndDrawCell(float rnd_)
   {
     this.rndDrawCell = rnd_;
-    this.setRandomDrawCell(rnd_);
+//    this.setRandomDrawCell(rnd_);
+    this.bComputeGridVec = true;
   }
 
   // ----------------------------------------------------------
@@ -336,8 +338,8 @@ class Grid
     }    
 
     setRandomDrawCell(rndDrawCell);
-    this.gridField.prepare();
-
+    if (this.gridField != null)  
+      this.gridField.prepare();
     computeCells();
   }
 
@@ -401,7 +403,7 @@ class Grid
     bDrawCell = new boolean[nbCells];
     for (int i=0; i<nbCells; i++) 
       bDrawCell[i] = ( random(1) >= r ) ? true : false;
-    computeCells();
+//    this.bComputeGridVec = true;
   }
 
   // ----------------------------------------------------------
@@ -531,12 +533,6 @@ class Grid
         gridCellRender.endDrawDirect();
       }
     }
-
-    /*    if (bComputeStripes && bModeDirect==false)
-     {
-     stripes.draw();
-     }
-     */
   }
 
   // ----------------------------------------------------------

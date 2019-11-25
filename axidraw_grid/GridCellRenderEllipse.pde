@@ -18,6 +18,7 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
   }
 
   // ----------------------------------------------------------
+  
   void compute(Rect rect, Polygon2D quad)
   {
     // Center of rect

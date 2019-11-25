@@ -228,7 +228,9 @@ class Controls
             grid.selectGridFieldWithIndex(int(value));
         } else if (name.equals("dlStripesAngleStrategy"))
         {
-          grid.setStripesStrategy(int(value));
+          if (theEvent.getController().getLabel().equals("stripes angle strategy") == false) // not the wisest ... 
+            grid.setStripesStrategy(int(value));
+          
         } else if (name.equals("rndCell")) { 
           grid.setRndDrawCell( value );
         } else if (name.equals("perturbation")) {

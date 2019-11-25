@@ -1,14 +1,14 @@
 {
   "perturbationAmount": 0.5782608389854431,
-  "bDrawGrid": true,
+  "bDrawGrid": false,
   "bDarkMode": true,
-  "rndDrawCell": 0.27826085686683655,
+  "rndDrawCell": 0,
   "bComputeStripes": true,
-  "bDrawPolygons": true,
-  "gridFieldName": "Random",
-  "resy": 28,
-  "bSquare": true,
-  "resx": 28,
+  "bDrawPolygons": false,
+  "gridFieldName": "Constant",
+  "resy": 26,
+  "bSquare": false,
+  "resx": 12,
   "bDrawField": false,
-  "gridCellRenderName": "Spaghetti"
+  "gridCellRenderName": "Ellipses"
 }
