@@ -13,7 +13,7 @@ class GridCellRenderVera extends GridCellRender{
     float w = rect.width;
     float h = rect.height;
     float v = this.grid.getFieldValue(x, y);
-    randomSeed(floor(v));
+    randomSeed(floor(v * this.grid.wCell * this.grid.hCell));
     int rndIndex = floor(random(0, 4));
     int rndIndex2 = floor(random(0, 4));
     while (rndIndex == rndIndex2) {
