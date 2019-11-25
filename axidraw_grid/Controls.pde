@@ -115,8 +115,8 @@ class Controls
       sliderRndCell =  cp5.addSlider("rndCell").setPosition(x, y).setSize(wControl, hControl).setRange(0.0, 1.0).setValue(grid.rndDrawCell).setGroup(gGrid).addCallback(cbGrid);
       y+=(hControl+padding);
 
-//      cp5.addLabel("Stripes").setPosition(x, y).setColor(color(255));
-//      y+=(hControl+padding);
+      //      cp5.addLabel("Stripes").setPosition(x, y).setColor(color(255));
+      //      y+=(hControl+padding);
 
       dlStripesAngleStrategy = cp5.addDropdownList("dlStripesAngleStrategy").setPosition(x, y).setWidth(wControl/2).setGroup(gGrid).setLabel("stripes angle strategy").addCallback(cbGrid);
       customizeDropdown(dlStripesAngleStrategy, hControl);
@@ -145,15 +145,17 @@ class Controls
       dlStripesAngleStrategy.addItem("random orthogonal", 2);
       dlStripesAngleStrategy.addItem("bound to field value", 2);
     }
-    
+
+
     dlGridCellRender.close();
     dlGridField.close();
     dlGridCellRender.bringToFront();
     dlGridField.bringToFront();
-    if (dlStripesAngleStrategy != null){
-    dlStripesAngleStrategy.close();
+    if (dlStripesAngleStrategy != null) {
+      dlStripesAngleStrategy.close();
       dlStripesAngleStrategy.bringToFront();
     }
+
     cp5.setBroadcast(true);
   }
 
@@ -218,10 +220,12 @@ class Controls
           grid.bDrawPolygons = value > 0.0;
         } else if (name.equals("dlGridCellRender"))
         {
-          grid.selectGridCellRenderWithIndex( int(value) );
+          if (theEvent.getController().getLabel().equals("grid cell") == false) // not the wisest ... 
+            grid.selectGridCellRenderWithIndex( int(value) );
         } else if (name.equals("dlGridField"))
         {
-          grid.selectGridFieldWithIndex(int(value));
+          if (theEvent.getController().getLabel().equals("grid field") == false) // not the wisest ... 
+            grid.selectGridFieldWithIndex(int(value));
         } else if (name.equals("dlStripesAngleStrategy"))
         {
           grid.setStripesStrategy(int(value));

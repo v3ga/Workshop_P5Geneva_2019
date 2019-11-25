@@ -5,9 +5,10 @@
   "rndDrawCell": 0.27826085686683655,
   "bComputeStripes": true,
   "bDrawPolygons": true,
-  "resy": 10,
+  "gridFieldName": "Sine",
+  "resy": 26,
   "bSquare": false,
-  "resx": 19,
+  "resx": 26,
   "bDrawField": false,
-  "gridCellRenderName": "Quads"
+  "gridCellRenderName": "Truchet"
 }

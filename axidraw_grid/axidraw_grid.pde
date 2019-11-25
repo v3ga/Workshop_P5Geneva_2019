@@ -28,7 +28,7 @@ import toxi.geom.*;
 import toxi.math.*;
 
 // ------------------------------------------------------
-boolean bModeDirect = false;
+boolean bModeDirect = true;
 
 // ------------------------------------------------------
 // Colors
@@ -88,6 +88,7 @@ void setupGrid()
   // Direct mode 
   grid.addGridCellRenderDirect( new GridCellRenderTemplate() );
   grid.addGridCellRenderDirect( new GridCellRenderTruchet() );
+  grid.addGridCellRenderDirect( new GridCellRenderSpaghetti() );
   grid.addGridCellRenderDirect( new GridCellRenderVera() );
 
   // Fields
@@ -108,8 +109,9 @@ void setup()
   setupGrid();
   setupControls();
 
-  grid.selectGridCellRenderWithIndex(0);
-  grid.selectGridFieldWithIndex(0);
+//  grid.selectGridCellRenderWithIndex(0);
+//  grid.selectGridFieldWithIndex(0);
+  grid.bUpdateControls = true;
 }
 
 // ------------------------------------------------------
@@ -150,6 +152,7 @@ void draw()
   beginExportSVG();
   grid.draw();
   endExportSVG();
+  grid.updateControls();
   controls.draw();
   drawDebug();
 }
