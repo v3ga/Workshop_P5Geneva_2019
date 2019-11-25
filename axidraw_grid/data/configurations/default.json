@@ -1,14 +1,14 @@
 {
   "perturbationAmount": 0.5782608389854431,
-  "bDrawGrid": false,
+  "bDrawGrid": true,
   "bDarkMode": true,
   "rndDrawCell": 0.27826085686683655,
   "bComputeStripes": true,
   "bDrawPolygons": true,
-  "gridFieldName": "Sine",
-  "resy": 26,
-  "bSquare": false,
-  "resx": 26,
+  "gridFieldName": "Random",
+  "resy": 28,
+  "bSquare": true,
+  "resx": 28,
   "bDrawField": false,
-  "gridCellRenderName": "Truchet"
+  "gridCellRenderName": "Spaghetti"
 }

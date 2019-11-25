@@ -128,7 +128,7 @@ class Grid
       if (gcr.name.equals(name))
       {
         println("setGridCellRenderWithName("+name+")");
-        
+
         this.gridCellRender = gcr;
         this.bComputeGridVec = true;
         this.bUpdateControls = true;
@@ -157,7 +157,7 @@ class Grid
       if (gf.name.equals(name))
       {
         println("setGridFieldWithName("+name+")");
-        
+
         this.gridField = gf;
         this.bComputeGridVec = true;
         this.bUpdateControls = true;
@@ -463,31 +463,33 @@ class Grid
   {
     if (bDrawGrid)
     {
-      pushStyle();
-      stroke(colorStroke, 100);
-      strokeWeight(1);
-      noFill();
-      Vec2D A, B, C, D;
-      beginShape(QUADS);
-      for (int j=0; j<this.resy; j++)
+        pushStyle();
+        noFill();
+      if (bModeDirect == false)
       {
-        for (int i=0; i<this.resx; i++)
+        stroke(colorStroke, 100);
+        strokeWeight(1);
+        Vec2D A, B, C, D;
+        beginShape(QUADS);
+        for (int j=0; j<this.resy; j++)
         {
-          if (getCell(i, j) != null)
+          for (int i=0; i<this.resx; i++)
           {
-            A = getVec2D(i, j);
-            B = getVec2D(i+1, j);
-            C = getVec2D(i+1, j+1);
-            D = getVec2D(i, j+1);
+            if (getCell(i, j) != null)
+            {
+              A = getVec2D(i, j);
+              B = getVec2D(i+1, j);
+              C = getVec2D(i+1, j+1);
+              D = getVec2D(i, j+1);
 
-            vertex(A.x, A.y);
-            vertex(B.x, B.y);
-            vertex(C.x, C.y);
-            vertex(D.x, D.y);
+              vertex(A.x, A.y);
+              vertex(B.x, B.y);
+              vertex(C.x, C.y);
+              vertex(D.x, D.y);
+            }
           }
         }
       }
-
 
       endShape();
 
@@ -577,7 +579,7 @@ class Grid
     setupColors();
 
     this.bDrawGrid = jsonGrid.getBoolean("bDrawGrid");
-    this.bSquare = jsonGrid.getBoolean("bSquare");
+    this.setSquare( jsonGrid.getBoolean("bSquare") );
     this.bDrawField = jsonGrid.getBoolean("bDrawField");
     this.bComputeStripes = jsonGrid.getBoolean("bComputeStripes");
     this.bDrawPolygons = jsonGrid.getBoolean("bDrawPolygons");
@@ -587,7 +589,7 @@ class Grid
 
     this.setGridCellRenderWithName( jsonGrid.getString("gridCellRenderName") );
     this.setGridFieldWithName( jsonGrid.getString("gridFieldName") );
-}
+  }
 
   // ----------------------------------------------------------
   void saveConfiguration(String name)

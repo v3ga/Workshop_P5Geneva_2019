@@ -89,6 +89,7 @@ void setupGrid()
   grid.addGridCellRenderDirect( new GridCellRenderTemplate() );
   grid.addGridCellRenderDirect( new GridCellRenderTruchet() );
   grid.addGridCellRenderDirect( new GridCellRenderSpaghetti() );
+  //grid.addGridCellRenderDirect( new GridCellRenderSpaghettiOrtho() );
   grid.addGridCellRenderDirect( new GridCellRenderVera() );
 
   // Fields
