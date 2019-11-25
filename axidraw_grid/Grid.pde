@@ -114,9 +114,11 @@ class Grid
   {
     if (index < this.listRenders.size())
     {
-      this.gridCellRender = listRenders.get(index);
-
-      this.bComputeGridVec = true;
+      GridCellRender gcr = listRenders.get(index);
+      if (gcr != this.gridCellRender) {
+        this.gridCellRender = gcr;
+        this.bComputeGridVec = true;
+      }
     }
   }
 
@@ -125,10 +127,9 @@ class Grid
   {
     for (GridCellRender gcr : listRenders)
     {
-      if (gcr.name.equals(name))
+      if (gcr.name.equals(name) && gcr != this.gridCellRender)
       {
         println("setGridCellRenderWithName("+name+")");
-        
         this.gridCellRender = gcr;
         this.bComputeGridVec = true;
         this.bUpdateControls = true;
@@ -141,11 +142,15 @@ class Grid
   {
     if (index < this.listFields.size())
     {
-      this.gridField = listFields.get(index);
-      this.gridField.prepare();
+      GridField gf = listFields.get(index);
+      if (gf != this.gridField) {
+        println("setGridFieldWithIndex("+index+")");
+        this.gridField = listFields.get(index);
+        this.gridField.prepare();
 
-      this.bComputeGridVec = true;
-      this.bUpdateControls = true;
+        this.bComputeGridVec = true;
+        this.bUpdateControls = true;
+      }
     }
   }  
 
@@ -154,10 +159,10 @@ class Grid
   {
     for (GridField gf : listFields)
     {
-      if (gf.name.equals(name))
+      if (gf.name.equals(name) && gf != this.gridField)
       {
         println("setGridFieldWithName("+name+")");
-        
+
         this.gridField = gf;
         this.bComputeGridVec = true;
         this.bUpdateControls = true;
