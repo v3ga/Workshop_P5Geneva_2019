@@ -34,13 +34,15 @@ class GridCellRender
   // ----------------------------------------------------------
   void showControls()
   {
-    g.show();
+    if (g!=null)
+      g.show();
   }
 
   // ----------------------------------------------------------
   void hideControls()
   {
-    g.hide();
+    if (g!=null)
+      g.hide();
   }
 
   // ----------------------------------------------------------
@@ -125,7 +127,7 @@ class GridCellRender
     stroke(colorStroke);
     noFill();
   }
-  
+
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)
   {
@@ -140,13 +142,12 @@ class GridCellRender
   // ----------------------------------------------------------
   float getGridFieldValue(float x, float y)
   {
-    return this.grid.getFieldValue(x,y);
+    return this.grid.getFieldValue(x, y);
   }
 
   // ----------------------------------------------------------
   float getGridFieldValue(Vec2D p)
   {
-    return this.getGridFieldValue(p.x,p.y);
+    return this.getGridFieldValue(p.x, p.y);
   }
-
 }

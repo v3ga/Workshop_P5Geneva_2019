@@ -97,8 +97,8 @@ class Grid
   void showGridCellRenderControls(GridCellRender selected)
   {
     for (GridCellRender gcr : listRenders)
-      gcr.g.hide();
-    if (selected != null) selected.g.show();
+      gcr.hideControls();
+    if (selected != null) selected.showControls();
   }
 
   // ----------------------------------------------------------
@@ -115,9 +115,22 @@ class Grid
     if (index < this.listRenders.size())
     {
       this.gridCellRender = listRenders.get(index);
-      showGridCellRenderControls(this.gridCellRender);
 
       this.bComputeGridVec = true;
+    }
+  }
+
+  // ----------------------------------------------------------
+  void setGridCellRenderWithName(String name)
+  {
+    for (GridCellRender gcr : listRenders)
+    {
+      if (gcr.name.equals(name))
+      {
+        this.gridCellRender = gcr;
+        showGridCellRenderControls(this.gridCellRender);
+        this.bComputeGridVec = true;
+      }
     }
   }
 
@@ -480,10 +493,7 @@ class Grid
           for (i=0; i<this.resx; i++)
           {
             offset = i + this.resx*j;
-            pushMatrix();
-            translate(rects[offset].x, rects[offset].y);
             gridCellRender.drawDirect(rects[offset], i, j);
-            popMatrix();
           }
         }
 
@@ -523,5 +533,48 @@ class Grid
       }
     }
     popStyle();
+  }
+
+
+  // ----------------------------------------------------------
+  void loadConfiguration(String name)
+  {
+    JSONObject jsonGrid = loadJSONObject("data/configurations/"+name+".json");
+
+    this.setResx( jsonGrid.getInt("resx") );  
+    this.setResy( jsonGrid.getInt("resy") );  
+
+    bDarkMode = jsonGrid.getBoolean("bDarkMode");
+    setupColors();
+
+    this.bDrawGrid = jsonGrid.getBoolean("bDrawGrid");
+    this.bSquare = jsonGrid.getBoolean("bSquare");
+    this.bDrawField = jsonGrid.getBoolean("bDrawField");
+    this.bComputeStripes = jsonGrid.getBoolean("bComputeStripes");
+    this.bDrawPolygons = jsonGrid.getBoolean("bDrawPolygons");
+
+    this.setRndDrawCell( jsonGrid.getFloat("rndDrawCell") );
+    this.setPerturbationAmount( jsonGrid.getFloat("perturbationAmount") );
+
+    this.setGridCellRenderWithName( jsonGrid.getString("gridCellRenderName") );
+  }
+
+  // ----------------------------------------------------------
+  void saveConfiguration(String name)
+  {
+    JSONObject jsonGrid = new JSONObject();
+    jsonGrid.setBoolean("bDarkMode", bDarkMode);
+    jsonGrid.setInt("resx", this.resx);
+    jsonGrid.setInt("resy", this.resy);
+    jsonGrid.setBoolean("bDrawGrid", bDrawGrid);
+    jsonGrid.setBoolean("bSquare", bSquare);
+    jsonGrid.setBoolean("bDrawField", bDrawField);
+    jsonGrid.setBoolean("bComputeStripes", bComputeStripes);
+    jsonGrid.setBoolean("bDrawPolygons", bDrawPolygons);
+    jsonGrid.setFloat("perturbationAmount", this.perturbationAmount);
+    jsonGrid.setFloat("rndDrawCell", this.rndDrawCell);
+    jsonGrid.setString("gridCellRenderName", this.gridCellRender.name);
+
+    saveJSONObject(jsonGrid, "data/configurations/"+name+".json");
   }
 }

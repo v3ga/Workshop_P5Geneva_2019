@@ -25,6 +25,12 @@ void generate()
   grid.bComputeGridVec = true;
 }
 
+// ------------------------------------------------------
+void saveConfiguration()
+{
+  grid.saveConfiguration("default");
+}
+
 
 // ------------------------------------------------------
 class Controls
@@ -40,7 +46,7 @@ class Controls
   DropdownList dlGridCellRender, dlGridField;
   Slider sliderPerturbationAmount, sliderRndCell;
   DropdownList dlStripesAngleStrategy;
-  Button btnExportSVG, btnGenerate;
+  Button btnExportSVG, btnGenerate, btnSaveConfiguration;
 
   public Controls(PApplet _parent)
   {
@@ -118,6 +124,9 @@ class Controls
 
     btnExportSVG = cp5.addButton("exportSVG").setLabel("export svg").setPosition(x, height - hControl - margin);
     btnGenerate = cp5.addButton("generate").setLabel("generate").setPosition(x + padding + btnExportSVG.getWidth(), height - hControl - margin);
+    btnSaveConfiguration = cp5.addButton("saveConfiguration").setLabel("save").setPosition(x + 2*padding + btnExportSVG.getWidth() + btnGenerate.getWidth(), height - hControl - margin);
+
+
 
     // Populate Dropdowns
     // DL Grid Cell Render

@@ -1,0 +1,13 @@
+{
+  "perturbationAmount": 0.5782608389854431,
+  "bDrawGrid": false,
+  "bDarkMode": true,
+  "rndDrawCell": 0.27826085686683655,
+  "bComputeStripes": true,
+  "bDrawPolygons": true,
+  "resy": 10,
+  "bSquare": false,
+  "resx": 19,
+  "bDrawField": false,
+  "gridCellRenderName": "Quads"
+}

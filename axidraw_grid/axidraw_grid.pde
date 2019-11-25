@@ -95,6 +95,9 @@ void setupGrid()
   grid.addGridField( new GridFieldSine() );
   grid.addGridField( new GridFieldNoise() );
   grid.addGridField( new GridFieldRandom() );
+
+  // Configuration
+  grid.loadConfiguration("default");
 }
 
 // ------------------------------------------------------
