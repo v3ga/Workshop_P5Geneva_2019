@@ -167,7 +167,7 @@ class GridFieldRandom extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void prepare()
   {
-    println("GridfieldRandom.prepare(), grid.resx="+this.grid.resx+",grid.resy="+this.grid.resy);
+//    println("GridfieldRandom.prepare(), grid.resx="+this.grid.resx+",grid.resy="+this.grid.resy);
     this.random = new float[this.grid.resx][this.grid.resy];
     int i, j;
     for (j=0; j<this.grid.resy; j++)

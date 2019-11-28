@@ -28,7 +28,7 @@ import toxi.geom.*;
 import toxi.math.*;
 
 // ------------------------------------------------------
-boolean bModeDirect = false;
+boolean bModeDirect = true;
 
 // ------------------------------------------------------
 // Colors
@@ -90,7 +90,7 @@ void setupGrid()
   grid.addGridCellRenderDirect( new GridCellRenderTruchet() );
   grid.addGridCellRenderDirect( new GridCellRenderSpaghetti() );
   //grid.addGridCellRenderDirect( new GridCellRenderSpaghettiOrtho() );
-  //grid.addGridCellRenderDirect( new GridCellRenderVera() );
+  grid.addGridCellRenderDirect( new GridCellRenderVera() );
 
   // Fields
   grid.addGridField( new GridFieldConstant() );
