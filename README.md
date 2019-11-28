@@ -101,4 +101,10 @@ Elle maintient une liste d'instances de *GridCellRender* et de *GridField*.
 ### Liens
 * [History of computer art part 2 : plotters](https://piratefsh.github.io/2019/01/07/computer-art-history-part-2.html)
 
+### Photos
+![Axidraw](images/191123_P5Geneva_poster.JPG)
+![Axidraw](images/191123_P5Geneva_concentration.JPG)
+![Axidraw](images/191123_P5Geneva_prints_01.jpg)
+![Axidraw](images/191123_P5Geneva_prints_02.JPG)
+
 
