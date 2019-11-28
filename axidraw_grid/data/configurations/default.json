@@ -2,13 +2,13 @@
   "perturbationAmount": 0.5782608389854431,
   "bDrawGrid": false,
   "bDarkMode": true,
-  "rndDrawCell": 0.27826085686683655,
+  "rndDrawCell": 0,
   "bComputeStripes": true,
-  "bDrawPolygons": true,
-  "gridFieldName": "Sine",
+  "bDrawPolygons": false,
+  "gridFieldName": "Constant",
   "resy": 26,
   "bSquare": false,
-  "resx": 26,
+  "resx": 12,
   "bDrawField": false,
-  "gridCellRenderName": "Truchet"
+  "gridCellRenderName": "Ellipses"
 }
