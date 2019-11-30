@@ -448,6 +448,16 @@ class Grid
   }
 
   // ----------------------------------------------------------
+  void update(float dt)
+  {
+    if (this.gridField.isAnimated())
+    {
+      this.gridField.update(dt);
+      this.bComputeGridVec = true; // update then
+    }
+  }
+
+  // ----------------------------------------------------------
   void compute()
   {
     computeGridVec();

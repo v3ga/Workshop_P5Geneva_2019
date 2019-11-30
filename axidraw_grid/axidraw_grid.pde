@@ -34,6 +34,11 @@ boolean bModeDirect = true;
 // Colors
 boolean bDarkMode = true;
 
+// ------------------------------------------------------
+boolean bDrawDebug = false;
+
+
+// ------------------------------------------------------
 // Colors constants + variables
 color COLOR_BLACK = color(0);
 color COLOR_WHITE = color(255);
@@ -51,8 +56,13 @@ int gridMargin = 40;
 // Export folder (relative to sketch)
 String strExportFolder = "data/exports/svg/";
 
-// ------------------------------------------------------
-boolean bDrawDebug = false;
+// Controls
+float yGridFieldControls = 200; 
+int hGridFieldControls = 200;
+float yGridCellRenderControls = 0;
+
+// Timer
+Timer timer;
 
 // ------------------------------------------------------
 Grid grid;
@@ -110,9 +120,7 @@ void setup()
   setupMedias();
   setupGrid();
   setupControls();
-
-//  grid.selectGridCellRenderWithIndex(0);
-//  grid.selectGridFieldWithIndex(0);
+  setupTimer();
   grid.bUpdateControls = true;
 }
 
@@ -145,11 +153,20 @@ void setupLibraries()
 }
 
 // ------------------------------------------------------
+void setupTimer()
+{
+  timer = new Timer();
+}
+
+// ------------------------------------------------------
 void draw()
 {
+  float dt = timer.update();  
+  
   background(colorBackground);
   drawLayout();
   grid.drawField();
+  grid.update(dt);
   grid.compute();
   beginExportSVG();
   grid.draw();

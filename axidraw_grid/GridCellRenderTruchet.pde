@@ -100,21 +100,16 @@ class GridCellRenderSpaghetti extends GridCellRenderTruchet
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
-
+    beginCreateControls();
+    
     ControlP5 cp5 = controls.cp5;
     g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
 
-    sliderScale = cp5.addSlider( _id("scale") ).setLabel("scale").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scale).setGroup(g).addCallback(this);
-    y+=(hControl+padding);
+    sliderScale = cp5.addSlider( _id("scale") ).setLabel("scale").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scale).setGroup(g).addCallback(this);
+    yControl+=(hControl+paddingControl);
 
 
-    cp5.setBroadcast(true);
+    endCreateControls();
   }
   // ----------------------------------------------------------
   public void controlEvent(CallbackEvent theEvent) 

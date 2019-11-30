@@ -3,11 +3,19 @@ class GridField
   String name = "";
   Grid grid;
   Group g;
+  boolean canAnimate = false;
+  boolean bAnimate = false;
 
   // ----------------------------------------------------------
   GridField(String name)
   {
     this.name = name;
+  }
+
+  // ----------------------------------------------------------
+  boolean isAnimated()
+  {
+    return canAnimate && bAnimate;
   }
 
   // ----------------------------------------------------------
@@ -49,6 +57,11 @@ class GridField
 
   // ----------------------------------------------------------
   void prepare()
+  {
+  }
+
+  // ----------------------------------------------------------
+  void update(float dt)
   {
   }
 
@@ -167,7 +180,7 @@ class GridFieldRandom extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void prepare()
   {
-//    println("GridfieldRandom.prepare(), grid.resx="+this.grid.resx+",grid.resy="+this.grid.resy);
+    //    println("GridfieldRandom.prepare(), grid.resx="+this.grid.resx+",grid.resy="+this.grid.resy);
     this.random = new float[this.grid.resx][this.grid.resy];
     int i, j;
     for (j=0; j<this.grid.resy; j++)
@@ -197,14 +210,18 @@ class GridFieldSine extends GridField implements CallbackListener
 {
   float nbPeriod = 1;
   Vec2D center = new Vec2D(0.5, 0.5);
+  float phase = 0.0;
+  float phaseSpeed = 90.0; // degrees / second
 
   Slider sliderNbPeriod;
   Slider2D slider2Dcenter;
+  Toggle tgAnimate;
 
   // ----------------------------------------------------------
   GridFieldSine()
   {
     super("Sine");
+    this.canAnimate = true;
   }
 
   // ----------------------------------------------------------
@@ -221,6 +238,9 @@ class GridFieldSine extends GridField implements CallbackListener
     g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
 
     cp5.setBroadcast(false);
+
+    tgAnimate = cp5.addToggle(_id("animate")).setLabel("animate").setPosition(x, y).setSize(hControl, hControl).setValue(bAnimate).setGroup(g).addCallback(this);
+    y+=(hControl+padding+8);
     sliderNbPeriod = cp5.addSlider( _id("nbPeriod") ).setLabel("period").setPosition(x, y).setSize(wControl, hControl).setRange(0.5, 4).setValue(this.nbPeriod).setGroup(g).addCallback(this);
     y+=(hControl+padding);
     slider2Dcenter = cp5.addSlider2D( _id("center") ).setLabel("center").setPosition(x, y).setSize(wControl/2-padding, wControl/2-padding).setMinMax(0.0, 0.0, 1.0, 1.0).setValue(center.x, center.y).setGroup(g).addCallback(this);
@@ -250,6 +270,10 @@ class GridFieldSine extends GridField implements CallbackListener
         center.set(slider2Dcenter.getArrayValue()[0], slider2Dcenter.getArrayValue()[1]);
         this.grid.bComputeGridVec = true;
       }
+      if (name.equals( _id("animate") ) )
+      {
+        this.bAnimate = value > 0.0;
+      }
       break;
     }
   }
@@ -260,9 +284,16 @@ class GridFieldSine extends GridField implements CallbackListener
   {
     float cx = this.grid.x + center.x*this.grid.w;
     float cy = this.grid.y + center.y*this.grid.h;
-    float dx = dist(x, cy, cx, cy);
     float d = dist(x, y, cx, cy) / (0.5*this.grid.w);
-    return map( sin( d * TWO_PI * this.nbPeriod ), -1, 1, 0, 1 );
+    return map( sin( radians(this.phase) + d * TWO_PI * this.nbPeriod ), -1, 1, 0, 1 );
+  }
+
+  // ----------------------------------------------------------
+  void update(float dt)
+  {
+    this.phase += this.phaseSpeed*dt;
+    if (this.phase >= 360.0)
+      this.phase -= 360.0;
   }
 }
 
@@ -327,7 +358,7 @@ class GridFieldGradientVertical extends GridField implements CallbackListener
   {
     super("vertical gradient");
   }
-  
+
   // ----------------------------------------------------------
   void createControls()
   {
@@ -369,6 +400,6 @@ class GridFieldGradientVertical extends GridField implements CallbackListener
   // ----------------------------------------------------------
   float getValue(float x, float y)
   {
-      return map(y,grid.y, grid.y + grid.h, bReverse ? 0.0 : 1.0, bReverse ? 1.0 : 0.0);
+    return map(y, grid.y, grid.y + grid.h, bReverse ? 0.0 : 1.0, bReverse ? 1.0 : 0.0);
   }
 }

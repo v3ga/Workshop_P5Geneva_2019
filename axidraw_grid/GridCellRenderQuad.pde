@@ -26,7 +26,7 @@ class GridCellRenderQuad extends GridCellRender implements CallbackListener
     quadCopy.scaleSize(this.scalex, this.scaley);
     // Add to polygons list
     listPolygons.add( quadCopy );
-  
+
     // Stripes ? 
     if (grid.bComputeStripes)
       computeStripes(quadCopy, grid.stripesAngleStrategy, grid.getFieldValue( quadCopy.getCentroid() ) );
@@ -35,22 +35,16 @@ class GridCellRenderQuad extends GridCellRender implements CallbackListener
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
+    beginCreateControls();
 
     ControlP5 cp5 = controls.cp5;
     g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, 10);
 
-    sliderScalex = cp5.addSlider( _id("scalex") ).setLabel("scalex").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scalex).setGroup(g).addCallback(this);
-    y+=(hControl+padding);
-    sliderScaley = cp5.addSlider( _id("scaley") ).setLabel("scaley").setPosition(x, y).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scaley).setGroup(g).addCallback(this);
+    sliderScalex = cp5.addSlider( _id("scalex") ).setLabel("scalex").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scalex).setGroup(g).addCallback(this);
+    yControl+=(hControl+paddingControl);
+    sliderScaley = cp5.addSlider( _id("scaley") ).setLabel("scaley").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0.2, 2).setValue(this.scaley).setGroup(g).addCallback(this);
 
-
-    cp5.setBroadcast(true);
+    endCreateControls();
   }
   // ----------------------------------------------------------
   public void controlEvent(CallbackEvent theEvent) 
