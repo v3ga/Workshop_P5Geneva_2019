@@ -357,24 +357,10 @@ class Grid
   void computeGridCellsStripes()
   {
     if (bModeDirect == true) return;
-    if (!bComputeStripes) return;
     this.gridCellRender.beginComputeStripes();
-
-    int i, j, offset;
-    for (j=0; j<this.resy; j++)
-    {
-      for (i=0; i<this.resx; i++)
-      {
-        offset = i + this.resx*j;
-        if (bDrawCell[offset])
-        {
-          this.gridCellRender.computeStripes(stripesAngleStrategy);
-        }
-      }
-    }
-
-println("computeGridCellsStripes(), nbLines=");
-}
+    if (!bComputeStripes) return;
+    this.gridCellRender.computeStripes(stripesAngleStrategy);
+  }
 
   // ----------------------------------------------------------
   void computeCells()

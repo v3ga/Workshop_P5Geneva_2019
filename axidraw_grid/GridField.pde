@@ -52,6 +52,12 @@ class GridField
   }
 
   // ----------------------------------------------------------
+  void jumpLineControlsMarginAdd(int margin)
+  {
+    yControl += (hControl + paddingControl) + margin;
+  }
+
+  // ----------------------------------------------------------
   void handleEventReleased(String name, float val)
   {
   }
@@ -240,7 +246,7 @@ class GridFieldSine extends GridField implements CallbackListener
     beginCreateControls();
 
     tgAnimate = controls.cp5.addToggle(_id("animate")).setLabel("animate").setPosition(xControl, yControl).setSize(hControl, hControl).setValue(bAnimate).setGroup(g).addCallback(this);
-    jumpLineControls();
+    jumpLineControlsMarginAdd(8);
     sliderNbPeriod = controls.cp5.addSlider( _id("nbPeriod") ).setLabel("period").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0.5, 4).setValue(this.nbPeriod).setGroup(g).addCallback(this);
     jumpLineControls();
     sliderPhaseSpeed = controls.cp5.addSlider( _id("phaseSpeed") ).setLabel("phase speed").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0, 360).setValue(this.nbPeriod).setGroup(g).addCallback(this);
