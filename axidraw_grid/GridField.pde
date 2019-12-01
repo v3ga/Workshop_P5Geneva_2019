@@ -6,6 +6,14 @@ class GridField
   boolean canAnimate = false;
   boolean bAnimate = false;
 
+  // Variables for controls layout
+  int marginControl = 5;
+  int wControl = int(rectColumnRight.width - 2*marginControl)-60;
+  int hControl = 20;
+  int paddingControl = 10;
+  int xControl = 5;
+  int yControl = 10;
+
   // ----------------------------------------------------------
   GridField(String name)
   {
@@ -21,6 +29,45 @@ class GridField
   // ----------------------------------------------------------
   void createControls()
   {
+  }
+
+  // ----------------------------------------------------------
+  void beginCreateControls()
+  {
+    ControlP5 cp5 = controls.cp5;
+    g = cp5.addGroup(this.name).setBackgroundHeight(200).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, yGridFieldControls);
+  }
+
+  // ----------------------------------------------------------
+  void endCreateControls()
+  {
+    ControlP5 cp5 = controls.cp5;
+    cp5.setBroadcast(true);
+  }  
+
+  // ----------------------------------------------------------
+  void jumpLineControls()
+  {
+    yControl += (hControl + paddingControl);
+  }
+
+  // ----------------------------------------------------------
+  void handleEventReleased(String name, float val)
+  {
+  }
+
+  // ----------------------------------------------------------
+  public void controlEvent(CallbackEvent theEvent) 
+  {
+    switch(theEvent.getAction()) 
+    {
+    case ControlP5.ACTION_RELEASED: 
+    case ControlP5.ACTION_RELEASEDOUTSIDE: 
+      String name = theEvent.getController().getName();
+      float val = theEvent.getController().getValue();
+      this.handleEventReleased(name, val);
+      break;
+    }
   }
 
   // ----------------------------------------------------------
@@ -86,42 +133,22 @@ class GridFieldConstant extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
+    beginCreateControls();
 
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
+    sliderValue = controls.cp5.addSlider( _id("value") ).setLabel("value").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0, 1).setValue(this.value).setGroup(g).addCallback(this);
 
-    cp5.setBroadcast(false);
-    sliderValue = cp5.addSlider( _id("value") ).setLabel("value").setPosition(x, y).setSize(wControl, hControl).setRange(0, 1).setValue(this.value).setGroup(g).addCallback(this);
-    y+=(hControl+padding);
-
-    cp5.setBroadcast(true);
+    endCreateControls();
   }
 
   // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
+  void handleEventReleased(String name, float val)
   {
-    switch(theEvent.getAction()) 
+    if (name.equals( _id("value") ) )
     {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      String name = theEvent.getController().getName();
-      float val = theEvent.getController().getValue();
-      //      println(name + "/"+value);
-      if (name.equals( _id("value") ) )
-      {
-        this.value = val;
-        this.grid.bComputeGridVec = true;
-      }
-      break;
+      this.value = val;
+      this.grid.bComputeGridVec = true;
     }
   }
-
 
   // ----------------------------------------------------------
   float getValue(float x, float y)
@@ -144,36 +171,19 @@ class GridFieldRandom extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
+    beginCreateControls();
 
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
+    controls.cp5.addButton(_id("generate")).setLabel("generate").setPosition(xControl, yControl).setGroup(g).addCallback(this);
 
-    cp5.setBroadcast(false);
-    cp5.addButton(_id("generate")).setLabel("generate").setPosition(x, y).setGroup(g).addCallback(this);
-    cp5.setBroadcast(true);
+    endCreateControls();
   }
 
   // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
+  void handleEventReleased(String name, float val)
   {
-    switch(theEvent.getAction()) 
+    if (name.equals( _id("generate") ) )
     {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      String name = theEvent.getController().getName();
-      float val = theEvent.getController().getValue();
-      //      println(name + "/"+value);
-      if (name.equals( _id("generate") ) )
-      {
-        this.grid.bComputeGridVec = true; // will in turn call prepare()
-      }
-      break;
+      this.grid.bComputeGridVec = true; // will in turn call prepare()
     }
   }
 
@@ -213,7 +223,7 @@ class GridFieldSine extends GridField implements CallbackListener
   float phase = 0.0;
   float phaseSpeed = 90.0; // degrees / second
 
-  Slider sliderNbPeriod;
+  Slider sliderNbPeriod, sliderPhaseSpeed;
   Slider2D slider2Dcenter;
   Toggle tgAnimate;
 
@@ -227,57 +237,40 @@ class GridFieldSine extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
+    beginCreateControls();
 
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
+    tgAnimate = controls.cp5.addToggle(_id("animate")).setLabel("animate").setPosition(xControl, yControl).setSize(hControl, hControl).setValue(bAnimate).setGroup(g).addCallback(this);
+    jumpLineControls();
+    sliderNbPeriod = controls.cp5.addSlider( _id("nbPeriod") ).setLabel("period").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0.5, 4).setValue(this.nbPeriod).setGroup(g).addCallback(this);
+    jumpLineControls();
+    sliderPhaseSpeed = controls.cp5.addSlider( _id("phaseSpeed") ).setLabel("phase speed").setPosition(xControl, yControl).setSize(wControl, hControl).setRange(0, 360).setValue(this.nbPeriod).setGroup(g).addCallback(this);
+    jumpLineControls();
+    slider2Dcenter = controls.cp5.addSlider2D( _id("center") ).setLabel("center").setPosition(xControl, yControl).setSize(wControl/2-paddingControl, wControl/2-paddingControl).setMinMax(0.0, 0.0, 1.0, 1.0).setValue(center.x, center.y).setGroup(g).addCallback(this);
+    jumpLineControls();
 
-    cp5.setBroadcast(false);
-
-    tgAnimate = cp5.addToggle(_id("animate")).setLabel("animate").setPosition(x, y).setSize(hControl, hControl).setValue(bAnimate).setGroup(g).addCallback(this);
-    y+=(hControl+padding+8);
-    sliderNbPeriod = cp5.addSlider( _id("nbPeriod") ).setLabel("period").setPosition(x, y).setSize(wControl, hControl).setRange(0.5, 4).setValue(this.nbPeriod).setGroup(g).addCallback(this);
-    y+=(hControl+padding);
-    slider2Dcenter = cp5.addSlider2D( _id("center") ).setLabel("center").setPosition(x, y).setSize(wControl/2-padding, wControl/2-padding).setMinMax(0.0, 0.0, 1.0, 1.0).setValue(center.x, center.y).setGroup(g).addCallback(this);
-    y+=(hControl+padding);
-
-    cp5.setBroadcast(true);
+    endCreateControls();
   }
 
   // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
+  void handleEventReleased(String name, float val)
   {
-    String name;
-    float value;
-    switch(theEvent.getAction()) 
+    if (name.equals( _id("nbPeriod") ) )
     {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      name = theEvent.getController().getName();
-      value = theEvent.getController().getValue();
-      //      println(name + "/"+value);
-      if (name.equals( _id("nbPeriod") ) )
-      {
-        this.nbPeriod = value;
-        this.grid.bComputeGridVec = true;
-      } else if (name.equals( _id("center") ) )
-      {
-        center.set(slider2Dcenter.getArrayValue()[0], slider2Dcenter.getArrayValue()[1]);
-        this.grid.bComputeGridVec = true;
-      }
-      if (name.equals( _id("animate") ) )
-      {
-        this.bAnimate = value > 0.0;
-      }
-      break;
+      this.nbPeriod = val;
+      this.grid.bComputeGridVec = true;
+    } else if (name.equals( _id("phaseSpeed") ) )
+    {
+      this.phaseSpeed = val;
+    } else if (name.equals( _id("center") ) )
+    {
+      center.set(slider2Dcenter.getArrayValue()[0], slider2Dcenter.getArrayValue()[1]);
+      this.grid.bComputeGridVec = true;
+    }
+    if (name.equals( _id("animate") ) )
+    {
+      this.bAnimate = val > 0.0;
     }
   }
-
 
   // ----------------------------------------------------------
   float getValue(float x, float y)
@@ -285,7 +278,7 @@ class GridFieldSine extends GridField implements CallbackListener
     float cx = this.grid.x + center.x*this.grid.w;
     float cy = this.grid.y + center.y*this.grid.h;
     float d = dist(x, y, cx, cy) / (0.5*this.grid.w);
-    return map( sin( radians(this.phase) + d * TWO_PI * this.nbPeriod ), -1, 1, 0, 1 );
+    return map( sin( -radians(this.phase) + d * TWO_PI * this.nbPeriod ), -1, 1, 0, 1 );
   }
 
   // ----------------------------------------------------------
@@ -310,36 +303,6 @@ class GridFieldNoise extends GridField implements CallbackListener
   }
 
   // ----------------------------------------------------------
-  void createControls()
-  {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
-
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
-
-    cp5.setBroadcast(false);
-
-    cp5.setBroadcast(true);
-  }
-
-  // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
-  {
-    switch(theEvent.getAction()) 
-    {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      break;
-    }
-  }
-
-
-  // ----------------------------------------------------------
   float getValue(float x, float y)
   {
     float cx = this.grid.x + 0.5*this.grid.w;
@@ -362,41 +325,21 @@ class GridFieldGradientVertical extends GridField implements CallbackListener
   // ----------------------------------------------------------
   void createControls()
   {
-    int margin = 5;
-    int wControl = int(rectColumnRight.width - 2*margin)-60;
-    int hControl = 20;
-    int padding = 10;
-    int x = 5;
-    int y = 10;
-
-    ControlP5 cp5 = controls.cp5;
-    g = cp5.addGroup(this.name).setBackgroundHeight(400).setWidth(int(rectColumnRight.width)).setBackgroundColor(color(0, 190)).setPosition(rectColumnRight.x, height-400);
-    tgReverse = cp5.addToggle(_id("reverse")).setLabel("reverse").setPosition(x, y).setSize(hControl, hControl).setValue(bReverse).setGroup(g).addCallback(this);
-    y+=(hControl+padding+8);
-
-    cp5.setBroadcast(true);
+    beginCreateControls();
+    tgReverse = controls.cp5.addToggle(_id("reverse")).setLabel("reverse").setPosition(xControl, yControl).setSize(hControl, hControl).setValue(bReverse).setGroup(g).addCallback(this);
+    endCreateControls();
   }
 
   // ----------------------------------------------------------
-  public void controlEvent(CallbackEvent theEvent) 
+  void handleEventReleased(String name, float val)
   {
-    switch(theEvent.getAction()) 
+    if (name.equals( _id("reverse") ) )
     {
-    case ControlP5.ACTION_RELEASED: 
-    case ControlP5.ACTION_RELEASEDOUTSIDE: 
-      String name = theEvent.getController().getName();
-      float val = theEvent.getController().getValue();
-      //      println(name + "/"+value);
-      if (name.equals( _id("reverse") ) )
-      {
-        this.bReverse = val > 0.0;
-        this.grid.bComputeGridVec = true;
-      }
-      break;
+      this.bReverse = val > 0.0;
+      this.grid.bComputeGridVec = true;
     }
   }
-
-
+  
   // ----------------------------------------------------------
   float getValue(float x, float y)
   {

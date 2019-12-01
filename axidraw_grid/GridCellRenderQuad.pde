@@ -26,10 +26,6 @@ class GridCellRenderQuad extends GridCellRender implements CallbackListener
     quadCopy.scaleSize(this.scalex, this.scaley);
     // Add to polygons list
     listPolygons.add( quadCopy );
-
-    // Stripes ? 
-    if (grid.bComputeStripes)
-      computeStripes(quadCopy, grid.stripesAngleStrategy, grid.getFieldValue( quadCopy.getCentroid() ) );
   }
 
   // ----------------------------------------------------------

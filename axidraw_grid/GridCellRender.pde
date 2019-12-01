@@ -6,6 +6,7 @@ class GridCellRender
   ArrayList<Polygon2D> listPolygons;
   Stripes stripes;
   Group g;
+  // Variables for controls layout
   int marginControl = 5;
   int wControl = int(rectColumnRight.width - 2*marginControl)-60;
   int hControl = 20;
@@ -91,7 +92,14 @@ class GridCellRender
   }
 
   // ----------------------------------------------------------
-  void computeStripes(Polygon2D p, int stripesAngleStrategy, float value)
+  void computeStripes(int stripesAngleStrategy)
+  {
+    for (Polygon2D p : listPolygons)
+      computeStripesForPolygon(p,stripesAngleStrategy, grid.getFieldValue( p.getCentroid()));
+  }
+  
+  // ----------------------------------------------------------
+  void computeStripesForPolygon(Polygon2D p, int stripesAngleStrategy, float value)
   {
     float angle = 0.0;
     if (stripesAngleStrategy == 0)

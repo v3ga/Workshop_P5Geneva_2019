@@ -204,7 +204,6 @@ class Grid
   {
     this.resy = resy;
     this.adjustResolutionSquare();
-    
   }
 
   // ----------------------------------------------------------
@@ -224,7 +223,7 @@ class Grid
   void setRndDrawCell(float rnd_)
   {
     this.rndDrawCell = rnd_;
-//    this.setRandomDrawCell(rnd_);
+    //    this.setRandomDrawCell(rnd_);
     this.bComputeGridVec = true;
   }
 
@@ -340,8 +339,14 @@ class Grid
         xx += wCell;
       }
       yy += hCell;
-    }    
+    }
 
+    computeGridCells();
+  }
+
+  // ----------------------------------------------------------
+  void computeGridCells()
+  {
     setRandomDrawCell(rndDrawCell);
     if (this.gridField != null)  
       this.gridField.prepare();
@@ -349,35 +354,37 @@ class Grid
   }
 
   // ----------------------------------------------------------
-  void setPerturbationAmount(float value)
+  void computeGridCellsStripes()
   {
-    this.perturbationAmount = value;
-    this.bComputeGridVec = true;
-  }
+    if (bModeDirect == true) return;
+    if (!bComputeStripes) return;
+    this.gridCellRender.beginComputeStripes();
 
-  // ----------------------------------------------------------
-  Vec2D getPerturbation(String perturbation)
-  {
-    Vec2D p = new Vec2D();
-    if (perturbation.equals("random"))
+    int i, j, offset;
+    for (j=0; j<this.resy; j++)
     {
-      p.x = perturbationAmount * random(-rndPerturbationMax, rndPerturbationMax);
-      p.y = perturbationAmount * random(-rndPerturbationMax, rndPerturbationMax);
+      for (i=0; i<this.resx; i++)
+      {
+        offset = i + this.resx*j;
+        if (bDrawCell[offset])
+        {
+          this.gridCellRender.computeStripes(stripesAngleStrategy);
+        }
+      }
     }
-    return p;
-  }
+
+println("computeGridCellsStripes(), nbLines=");
+}
 
   // ----------------------------------------------------------
   void computeCells()
   {
     if ( this.gridCellRender != null)
     {
-
       // Mode "vectoriel"
       if (bModeDirect == false)
       {
         this.gridCellRender.beginCompute();
-        this.gridCellRender.beginComputeStripes();
 
         int i, j, offset;
         for (j=0; j<this.resy; j++)
@@ -408,7 +415,7 @@ class Grid
     bDrawCell = new boolean[nbCells];
     for (int i=0; i<nbCells; i++) 
       bDrawCell[i] = ( random(1) >= r ) ? true : false;
-//    this.bComputeGridVec = true;
+    //    this.bComputeGridVec = true;
   }
 
   // ----------------------------------------------------------
@@ -429,6 +436,25 @@ class Grid
   int getNbCells()
   {
     return this.resx*this.resy;
+  }
+
+  // ----------------------------------------------------------
+  void setPerturbationAmount(float value)
+  {
+    this.perturbationAmount = value;
+    this.bComputeGridVec = true;
+  }
+
+  // ----------------------------------------------------------
+  Vec2D getPerturbation(String perturbation)
+  {
+    Vec2D p = new Vec2D();
+    if (perturbation.equals("random"))
+    {
+      p.x = perturbationAmount * random(-rndPerturbationMax, rndPerturbationMax);
+      p.y = perturbationAmount * random(-rndPerturbationMax, rndPerturbationMax);
+    }
+    return p;
   }
 
   // ----------------------------------------------------------
@@ -453,7 +479,6 @@ class Grid
     if (this.gridField.isAnimated())
     {
       this.gridField.update(dt);
-      this.bComputeGridVec = true; // update then
     }
   }
 
@@ -461,6 +486,7 @@ class Grid
   void compute()
   {
     computeGridVec();
+    computeGridCellsStripes();
   }
 
   // ----------------------------------------------------------
@@ -480,8 +506,8 @@ class Grid
   {
     if (bDrawGrid)
     {
-        pushStyle();
-        noFill();
+      pushStyle();
+      noFill();
       if (bModeDirect == false)
       {
         stroke(colorStroke, 100);

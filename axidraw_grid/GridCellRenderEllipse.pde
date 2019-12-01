@@ -18,7 +18,6 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
   }
 
   // ----------------------------------------------------------
-  
   void compute(Rect rect, Polygon2D quad)
   {
     // Center of rect
@@ -32,11 +31,8 @@ class GridCellRenderEllipse extends GridCellRender implements CallbackListener
     
     // Add to polygons list
     listPolygons.add(  ellipsePertubation );
-  
-    // Stripes ? 
-    if (grid.bComputeStripes)
-      computeStripes(ellipsePertubation, grid.stripesAngleStrategy, grid.getFieldValue( ellipse.getCentroid() ) );
   }
+  
 
   // ----------------------------------------------------------
   void drawDirect(Rect rect, int i, int j)

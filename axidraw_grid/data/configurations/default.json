@@ -3,12 +3,12 @@
   "bDrawGrid": false,
   "bDarkMode": true,
   "rndDrawCell": 0,
-  "bComputeStripes": false,
-  "bDrawPolygons": true,
-  "gridFieldName": "Random",
-  "resy": 18,
-  "bSquare": true,
-  "resx": 18,
+  "bComputeStripes": true,
+  "bDrawPolygons": false,
+  "gridFieldName": "Sine",
+  "resy": 25,
+  "bSquare": false,
+  "resx": 25,
   "bDrawField": false,
-  "gridCellRenderName": "Vera"
+  "gridCellRenderName": "Ellipses"
 }

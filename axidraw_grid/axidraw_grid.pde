@@ -28,7 +28,7 @@ import toxi.geom.*;
 import toxi.math.*;
 
 // ------------------------------------------------------
-boolean bModeDirect = true;
+boolean bModeDirect = false;
 
 // ------------------------------------------------------
 // Colors

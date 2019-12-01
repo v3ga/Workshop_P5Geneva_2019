@@ -121,6 +121,8 @@ class Stripes
   // ----------------------------------------------------------
   void drawWithMode(String mode)
   {
+    if (lines == null) return;
+    
     pushStyle();
     stroke(colorStroke);
     strokeWeight(1);
